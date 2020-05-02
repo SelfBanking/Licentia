@@ -125,7 +125,7 @@ export async function checkAuth (dispatch, payload) {
     const result = localStorage.getItem('accessToken')
 
     if (result === 'yes') {
-      dispatch({ type: actions.CHECK_AUTH_SUCCESS, accountId: '33' })
+      dispatch({ type: actions.CHECK_AUTH_SUCCESS, payload: '33' })
     } else {
       dispatch({ type: actions.CHECK_AUTH_FAILURE, payload: 'Unauthorized.' })
     }
