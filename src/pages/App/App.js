@@ -1,81 +1,20 @@
-import React, { useEffect } from 'react'
-import { HashRouter } from 'react-router-dom'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import React from 'react'
+import { createBrowserHistory } from 'history'
+import { Switch, Route, Router } from 'react-router-dom'
 
-import LoginPage from '../Login/LoginPage'
-import DashboardPage from '../Dashboard/DashboardPage'
-
-import {
-  useUserState,
-  checkAuth,
-  useUserDispatch
-} from '../../context/UserContext'
-import { LoginProvider } from '../Login/LoginContext'
+import DashboardPage from '../Dashboard'
+import Header from '../../components/Header'
 
 function App (props) {
-  const { status: userStatus } = useUserState()
-  const userDispatch = useUserDispatch()
-
-  useEffect(() => {
-    if (userStatus === 'INIT') {
-      checkAuth(userDispatch)
-    }
-  })
+  const hist = createBrowserHistory()
 
   return (
-    <HashRouter>
+    <Router history={hist}>
+      <Header />
       <Switch>
-        <PrivateRoute exact path='/' component={DashboardRoute} />
-        <PublicRoute exact path='/login' component={LoginRoute} />
+        <Route exact path='/' component={DashboardPage} />
       </Switch>
-    </HashRouter>
-  )
-}
-
-function LoginRoute () {
-  return (
-    <LoginProvider>
-      <LoginPage />
-    </LoginProvider>
-  )
-}
-
-function DashboardRoute () {
-  return <DashboardPage />
-}
-
-function PrivateRoute ({ component, ...rest }) {
-  const { isAuthenticated } = useUserState()
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? (
-          React.createElement(component, props)
-        ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  )
-}
-
-function PublicRoute ({ component, ...rest }) {
-  const { isAuthenticated } = useUserState()
-
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? (
-          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-        ) : (
-          React.createElement(component, props)
-        )
-      }
-    />
+    </Router>
   )
 }
 
