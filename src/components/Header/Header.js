@@ -47,7 +47,7 @@ const Header = () => {
           aria-label='menu'
         ></IconButton>
         <Typography variant='h6' className={classes.title}>
-          LICENTIA SELF BANK
+          LICENTIA
         </Typography>
         {connectStatus === 'GETTING' ? (
           <CircularProgress />
