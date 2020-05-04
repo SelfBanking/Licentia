@@ -25,16 +25,15 @@ const initialState = {
   status: USER_STATUS.INIT,
   web3Injected,
   message: {
-    connectMetaMask: null,
-    signOut: null
+    metamask: null
   },
   error: {
-    checkAuth: false
+    metamask: false
   }
 }
 
 const actions = {
-  SIGN_OUT_SUCCESS: 'SIGN_OUT_SUCCESS',
+  DISCONNECT_WALLET_SUCCESS: 'SIGN_OUT_SUCCESS',
 
   CONNECT_METAMASK_REQUEST: 'CONNECT_METAMASK_REQUEST',
   CONNECT_METAMASK_SUCCESS: 'CONNECT_METAMASK_SUCCESS',
@@ -50,17 +49,21 @@ export function walletReducer (state, action) {
         activeUser: null,
         error: {
           ...state.error,
-          connectMetaMask: null
+          metamask: null
         }
       }
     case actions.CONNECT_METAMASK_SUCCESS:
       return {
         ...state,
         status: USER_STATUS.IDLE,
-        activeUser: action.payload,
+        activeUser: action.payload.account,
+        message: {
+          ...state.message,
+          metamask: action.payload.message
+        },
         error: {
           ...state.error,
-          connectMetaMask: null
+          metamask: null
         }
       }
 
@@ -71,17 +74,17 @@ export function walletReducer (state, action) {
         activeUser: null,
         error: {
           ...state.error,
-          connectMetaMask: action.payload
+          metamask: action.payload
         }
       }
-    case actions.SIGN_OUT_SUCCESS:
+    case actions.DISCONNECT_WALLET_SUCCESS:
       return {
         ...state,
-        status: USER_STATUS.GETTING,
+        status: USER_STATUS.IDLE,
         activeUser: null,
         message: {
           ...state.message,
-          signOut: 'Sign out successful.'
+          metamask: 'Successfully disconnected wallet.'
         }
       }
 
@@ -125,17 +128,36 @@ export function useWalletDispatch () {
 export async function connectMetamask (dispatch) {
   dispatch({ type: actions.CONNECT_METAMASK_REQUEST })
   try {
-    await initalize()
-    const user = await activeUser()
+    const initMM = await initalize()
 
-    if (web3Injected && user) {
-      dispatch({ type: actions.CONNECT_METAMASK_SUCCESS, payload: user })
-    } else {
+    if (!window.ethereum) {
+      alert('Metamask is required.')
+
+      return dispatch({
+        type: actions.CONNECT_METAMASK_FAILURE,
+        payload: 'Mestamask is required.'
+      })
+    }
+
+    if (initMM) {
+      setTimeout(async () => {
+        const user = await activeUser()
+
+        dispatch({
+          type: actions.CONNECT_METAMASK_SUCCESS,
+          payload: {
+            account: user,
+            message: 'Succcessfully connected to wallet.'
+          }
+        })
+      }, 1000)
+    }
+
+    if (!web3Injected && !initMM) {
       dispatch({
         type: actions.CONNECT_METAMASK_FAILURE,
-        payload: 'Faled to connect Metamask.'
+        payload: 'Failed to connect Metamask.'
       })
-      alert('Metamask is required.')
     }
   } catch (err) {
     dispatch({
@@ -145,6 +167,9 @@ export async function connectMetamask (dispatch) {
   }
 }
 
-export function signOut (dispatch) {
-  dispatch({ type: actions.SIGN_OUT_SUCCESS })
+export function disconnectWallet (dispatch) {
+  dispatch({
+    type: actions.DISCONNECT_WALLET_SUCCESS,
+    payload: { message: 'Successfully disconnected wallet.' }
+  })
 }
