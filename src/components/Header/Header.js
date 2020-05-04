@@ -4,7 +4,9 @@ import {
   AppBar,
   Typography,
   Button,
-  IconButton
+  IconButton,
+  CircularProgress,
+  Grid
 } from '@material-ui/core'
 import useStyles from './styles'
 import {
@@ -15,7 +17,26 @@ import {
 
 const Header = () => {
   const classes = useStyles()
-  const { handleWalletConnect, activeUser } = useHeaderLogic()
+  const { handleWalletConnect, activeUser, connectStatus } = useHeaderLogic()
+
+  const ButtonsOrAddress = () => {
+    return (
+      <Grid>
+        {!activeUser ? (
+          <Button
+            variant='outlined'
+            color='inherit'
+            onClick={handleWalletConnect}
+          >
+            CONNECT WALLET
+          </Button>
+        ) : (
+          <Typography variant='h5'>{activeUser}</Typography>
+        )}
+      </Grid>
+    )
+  }
+
   return (
     <AppBar position='static'>
       <Toolbar className={classes.toolbar} elevation={0}>
@@ -28,16 +49,10 @@ const Header = () => {
         <Typography variant='h6' className={classes.title}>
           LICENTIA SELF BANK
         </Typography>
-        {!activeUser ? (
-          <Button
-            variant='outlined'
-            color='inherit'
-            onClick={handleWalletConnect}
-          >
-            CONNECT WALLET
-          </Button>
+        {connectStatus === 'GETTING' ? (
+          <CircularProgress />
         ) : (
-          <Typography variant='h5'>{activeUser}</Typography>
+          <ButtonsOrAddress />
         )}
       </Toolbar>
     </AppBar>
@@ -46,11 +61,11 @@ const Header = () => {
 
 const useHeaderLogic = () => {
   const walletDispatch = useWalletDispatch()
-  const { activeUser, Web3Injected } = useWalletState()
+  const { status: connectStatus, activeUser, Web3Injected } = useWalletState()
 
   const handleWalletConnect = () => connectMetamask(walletDispatch)
 
-  return { handleWalletConnect, activeUser, Web3Injected }
+  return { handleWalletConnect, activeUser, Web3Injected, connectStatus }
 }
 
 export default Header
