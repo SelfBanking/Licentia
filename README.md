@@ -1,3 +1,5 @@
+![Licentia](https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png)
+
 ## Licentia Self Bank
 
 ![Standard Js](https://cdn.rawgit.com/feross/standard/master/badge.svg)
