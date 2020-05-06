@@ -5,8 +5,8 @@ export default makeStyles(theme => ({
     flexGrow: 1
   },
   paper: {
-    backgroundColor: '#e9e9e9',
-    border: '1px solid gray'
+    border: '1px solid #e3e3e3',
+    padding: 10
   },
 
   container: {

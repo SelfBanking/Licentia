@@ -1,0 +1,6 @@
+{
+  "name": "HttpRequest",
+  "version": "0.0.0",
+  "private": true,
+  "main": "HttpRequest.js"
+}

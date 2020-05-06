@@ -1,0 +1,6 @@
+{
+  "name": "addresses",
+  "version": "0.0.0",
+  "private": true,
+  "main": "addresses.js"
+}

@@ -1,23 +1,25 @@
 import React from 'react'
-import { withRouter, Switch, Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-import { Grid } from '@material-ui/core'
-import SideMenu from '../../components/SideMenu'
-import Overview from '../Overview'
+import { Grid, Box } from '@material-ui/core'
 
-import TopMenu from './components/TopMenu'
+import Aave from './components/Aave'
+import Compound from './components/Compound'
+import HeadlineMenu from './components/HeadlineMenu'
 
 function Dashboard (props) {
   return (
-    <Grid container>
-      <Grid item xs={2} md={2}>
-        <SideMenu />
+    <Grid container justify='center' spacing={3}>
+      <HeadlineMenu {...props} />
+      <Grid item md={6}>
+        <Box m={3}>
+          <Aave {...props} />
+        </Box>
       </Grid>
-      <Grid item xs={10}>
-        <TopMenu />
-        <Switch>
-          <Route exact path='/' component={Overview} />
-        </Switch>
+      <Grid item md={6}>
+        <Box m={3}>
+          <Compound {...props} />
+        </Box>
       </Grid>
     </Grid>
   )
