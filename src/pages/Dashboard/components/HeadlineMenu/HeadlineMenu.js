@@ -14,7 +14,7 @@ function HeadlineMenu (props) {
             <Grid item>
               <Button
                 variant={
-                  active.toUpperCase() === 'ETH' ? 'contained' : 'outlined'
+                  active?.toUpperCase() === 'ETH' ? 'contained' : 'outlined'
                 }
                 onClick={() => props.history.push('/eth')}
               >
@@ -24,7 +24,7 @@ function HeadlineMenu (props) {
             <Grid item>
               <Button
                 variant={
-                  active.toUpperCase() === 'BTC' ? 'contained' : 'outlined'
+                  active?.toUpperCase() === 'BTC' ? 'contained' : 'outlined'
                 }
                 onClick={() => props.history.push('/btc')}
               >
