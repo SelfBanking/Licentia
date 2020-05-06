@@ -1,9 +1,8 @@
-import React from 'react'
-import logger from 'use-reducer-logger'
-import { getRequest } from 'services/HttpRequest'
+import React, { useReducer } from 'react'
+import { getRequest } from '../../../services/HttpRequest'
 
-const CompoundStateContext = React.createContext()
-const CompoundDispatchContext = React.createContext()
+const RatesStateContext = React.createContext()
+const RatesDispatchContext = React.createContext()
 
 // fetch status:
 // INIT is when the component first loads.
@@ -36,7 +35,9 @@ const actions = {
   GET_CTOKEN_DATA_FAILURE: 'GET_CTOKEN_DATA_FAILURE'
 }
 
-export function compoundReducer (state, action) {
+export function ratesReducer (state, action) {
+  console.log('prevState: ', state)
+  console.log('action: ', action)
   switch (action.type) {
     case actions.GET_CTOKEN_DATA_REQUEST:
       return {
@@ -52,7 +53,7 @@ export function compoundReducer (state, action) {
       return {
         ...state,
         status: USER_STATUS.IDLE,
-        cToken: action.paylaod.cToken,
+        cToken: action.payload,
         message: {
           ...state.message,
           get: action.payload.message
@@ -62,8 +63,7 @@ export function compoundReducer (state, action) {
           get: null
         }
       }
-
-    case actions.GET_CTOKEN_DATA_REQUEST:
+    case actions.GET_CTOKEN_DATA_FAILURE:
       return {
         ...state,
         cToken: null,
@@ -79,46 +79,40 @@ export function compoundReducer (state, action) {
   }
 }
 
-export function CompoundProvider ({ children }) {
-  const thisReducer =
-    process.env.NODE_ENV === 'development'
-      ? logger(compoundReducer)
-      : compoundReducer
-  const [state, dispatch] = React.useReducer(thisReducer, initialState)
+export function RatesProvider ({ children }) {
+  const [state, dispatch] = useReducer(ratesReducer, initialState)
 
   return (
-    <CompoundStateContext.Provider value={state}>
-      <CompoundDispatchContext.Provider value={dispatch}>
+    <RatesStateContext.Provider value={state}>
+      <RatesDispatchContext.Provider value={dispatch}>
         {children}
-      </CompoundDispatchContext.Provider>
-    </CompoundStateContext.Provider>
+      </RatesDispatchContext.Provider>
+    </RatesStateContext.Provider>
   )
 }
 
-export function useCompoundState () {
-  const context = React.useContext(CompoundStateContext)
+export function useRatesState () {
+  const context = React.useContext(RatesStateContext)
   if (context === undefined) {
-    throw new Error('useCompoundState must be used within a CompoundProvider')
+    throw new Error('useRatesState must be used within a RatesProvider')
   }
   return context
 }
 
-export function useCompoundDispatch () {
-  const context = React.useContext(CompoundDispatchContext)
+export function useRatesDispatch () {
+  const context = React.useContext(RatesDispatchContext)
   if (context === undefined) {
-    throw new Error(
-      'useCompoundDispatch must be used within a CompoundProvider'
-    )
+    throw new Error('useRatesDispatch must be used within a RatesProvider')
   }
   return context
 }
 
-export async function getCtokenData () {
+export async function getCtokenData (dispatch) {
   try {
+    dispatch({ type: actions.GET_CTOKEN_DATA_REQUEST })
     const result = await getRequest(
       'https://api.compound.finance/api/v2/ctoken'
     )
-
     if (result.status === 200) {
       const response = await result.json()
       dispatch({
@@ -128,13 +122,13 @@ export async function getCtokenData () {
     } else {
       dispatch({
         type: actions.GET_CTOKEN_DATA_FAILURE,
-        payload: 'Failed to get cToken data from Compound.'
+        payload: 'Failed to get cToken rates from Compound.'
       })
     }
   } catch (err) {
     dispatch({
       type: actions.GET_CTOKEN_DATA_FAILURE,
-      payload: 'Failed to get cToken data from Compound.'
+      payload: 'Failed to get cToken rates from Compound.'
     })
   }
 }

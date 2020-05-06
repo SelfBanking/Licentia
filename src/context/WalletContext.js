@@ -1,5 +1,4 @@
 import React from 'react'
-import logger from 'use-reducer-logger'
 import {
   web3Injected,
   initalize,
@@ -41,6 +40,8 @@ const actions = {
 }
 
 export function walletReducer (state, action) {
+  console.log('prevState: ', state)
+  console.log('action: ', action)
   switch (action.type) {
     case actions.CONNECT_METAMASK_REQUEST:
       return {
@@ -94,11 +95,7 @@ export function walletReducer (state, action) {
 }
 
 export function WalletProvider ({ children }) {
-  const thisReducer =
-    process.env.NODE_ENV === 'development'
-      ? logger(walletReducer)
-      : walletReducer
-  const [state, dispatch] = React.useReducer(thisReducer, initialState)
+  const [state, dispatch] = React.useReducer(walletReducer, initialState)
 
   return (
     <WalletStateContext.Provider value={state}>

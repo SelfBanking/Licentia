@@ -6,7 +6,10 @@ import {
   Button,
   IconButton,
   CircularProgress,
-  Grid
+  Grid,
+  FormGroup,
+  Switch,
+  FormControlLabel
 } from '@material-ui/core'
 import useStyles from './styles'
 import {
@@ -31,11 +34,29 @@ const Header = () => {
             CONNECT WALLET
           </Button>
         ) : (
-          <Typography variant='h5'>{activeUser}</Typography>
+          <Grid>
+            <Typography variant='h5'>{activeUser}</Typography>
+          </Grid>
         )}
       </Grid>
     )
   }
+
+  const SwitchComponent = () => (
+    <FormGroup>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={false}
+            onChange={() => console.log}
+            name='checkedB'
+            color='primary'
+          />
+        }
+        label='Primary'
+      />
+    </FormGroup>
+  )
 
   return (
     <AppBar position='static'>
