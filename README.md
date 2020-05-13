@@ -1,4 +1,4 @@
-![Licentia](https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png)
+<img src="https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png" height="100" />
 
 ## Licentia Self Bank
 
