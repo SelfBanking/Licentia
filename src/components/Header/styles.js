@@ -8,7 +8,8 @@ export default makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingLeft:'5px'
   },
   toolbar: {
     backgroundColor: '#232323'

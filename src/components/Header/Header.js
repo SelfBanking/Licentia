@@ -17,6 +17,7 @@ import {
   useWalletState,
   connectMetamask
 } from '../../context/WalletContext'
+import SideMenu from '../SideMenu/SideMenu.tsx';
 
 const Header = () => {
   const classes = useStyles()
@@ -67,9 +68,11 @@ const Header = () => {
           color='inherit'
           aria-label='menu'
         ></IconButton>
+         <SideMenu/>
         <Typography variant='h6' className={classes.title}>
           LICENTIA
         </Typography>
+        
         {connectStatus === 'GETTING' ? (
           <CircularProgress />
         ) : (
