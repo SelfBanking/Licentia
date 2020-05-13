@@ -14,23 +14,16 @@ import ArrowForwardIosRounded from '@material-ui/icons/ArrowForwardIosRounded';
 
 import useStyles from './styles'
 
-type Anchor = 'left';
+
 
 const SideMenu = () => {
   const classes = useStyles()
-
   const [state, setState] = React.useState({
     left: false
   });
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
-  ) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-    ) {
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
@@ -38,7 +31,7 @@ const SideMenu = () => {
   };
  
 
-  const list = (anchor: Anchor) => (
+  const list = (anchor) => (
     <div
       className={clsx(classes.list, {
         //[classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -68,7 +61,7 @@ const SideMenu = () => {
   );
 
   return <div>
-          {(['left'] as Anchor[]).map((anchor) => (
+          {['left'].map((anchor) => (
             <React.Fragment key={anchor}>
               <ArrowForwardIosRounded className={classes.arrowIcon} onClick={toggleDrawer(anchor, true)}>{anchor}</ArrowForwardIosRounded>
               {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}

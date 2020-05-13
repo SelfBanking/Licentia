@@ -17,7 +17,7 @@ import {
   useWalletState,
   connectMetamask
 } from '../../context/WalletContext'
-import SideMenu from '../SideMenu/SideMenu.tsx';
+import SideMenu from '../SideMenu/SideMenu';
 
 const Header = () => {
   const classes = useStyles()
