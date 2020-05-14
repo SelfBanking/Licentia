@@ -18,6 +18,7 @@ import {
   connectMetamask
 } from '../../context/WalletContext'
 import SideMenu from '../SideMenu/SideMenu';
+import PortisBtn from '../Portis/PortisBtn';
 
 const Header = () => {
   const classes = useStyles()
@@ -39,6 +40,8 @@ const Header = () => {
             <Typography variant='h5'>{activeUser}</Typography>
           </Grid>
         )}
+
+        <PortisBtn/>
       </Grid>
     )
   }

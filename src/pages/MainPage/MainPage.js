@@ -2,7 +2,8 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Grid, Box, Paper, Icon, Typography } from '@material-ui/core'
 import useStyles from './styles'
-
+import Mainchart from './components/Mainchart/Mainchart';
+import AccountDetails from './components/AccountDetails/AccountDetails';
 
 //import Aave from './components/Aave'
 //import Compound from './components/Compound'
@@ -30,10 +31,17 @@ function MainPage (props) {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Paper className={classes.paper}>
+            <Mainchart/>
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Typography variant="h3" gutterBottom>
+                ALL ASSETS
+          </Typography>
+          <Paper className={classes.paper}>
+            <AccountDetails/>
+          </Paper>
         </Grid>
 
       </Grid>
