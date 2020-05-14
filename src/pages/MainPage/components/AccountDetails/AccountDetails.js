@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import {  } from '@material-ui/icons';
 import {  } from '@material-ui/styles';
 
-import useStyles from './accountDetailsStyle';
+import useStyles from './AccountDetailsStyle';
 //import { string } from 'prop-types';
 
 
@@ -23,7 +23,7 @@ const AccountDetails = () => {
 
     //  })
   
-    return <div className={classes.accountDetailsStyle}>
+    return <div className={classes.AccountDetailsStyle}>
             <Typography variant="h4" gutterBottom>
                 Account 1
                 
