@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { ArrowForwardIosRounded } from '@material-ui/icons/ArrowForwardIosRounded';
+import {  } from '@material-ui/icons';
 
 import useStyles from './mainchartStyles';
 //source: https://recharts.org/en-US/guide/getting-started
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
-import { withTheme } from '@material-ui/styles';
+import {  } from '@material-ui/styles';
 
 
 const Mainchart = () => {
@@ -35,10 +35,10 @@ const Mainchart = () => {
           name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
         },
       ];
-    const functionOne = () => (
-     {
+    // const functionOne = () => (
+    //  {
 
-     })
+    //  })
   
     return <div className={classes.chartStyle}>
             <Typography variant="h3" gutterBottom>

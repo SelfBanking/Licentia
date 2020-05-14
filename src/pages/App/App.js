@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserHistory } from 'history'
 import { Switch, Route, Router } from 'react-router-dom'
 
-import DashboardPage from '../Dashboard'
+//import DashboardPage from '../Dashboard'
 import Header from '../../components/Header'
 import MainPage from '../MainPage/MainPage';
 
@@ -29,8 +29,8 @@ function App (props) {
   )
 }
 
-function TopPadding () {
-  return <div styles={{ height: 100 }}>.</div>
-}
+// function TopPadding () {
+//   return <div styles={{ height: 100 }}>.</div>
+// }
 
 export default App
