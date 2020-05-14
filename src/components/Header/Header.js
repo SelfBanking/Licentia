@@ -6,10 +6,7 @@ import {
   Button,
   IconButton,
   CircularProgress,
-  Grid,
-  FormGroup,
-  Switch,
-  FormControlLabel
+  Grid
 } from '@material-ui/core'
 import useStyles from './styles'
 import {
@@ -46,21 +43,21 @@ const Header = () => {
     )
   }
 
-  const SwitchComponent = () => (
-    <FormGroup>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={false}
-            onChange={() => console.log}
-            name='checkedB'
-            color='primary'
-          />
-        }
-        label='Primary'
-      />
-    </FormGroup>
-  )
+  // const SwitchComponent = () => (
+  //   <FormGroup>
+  //     <FormControlLabel
+  //       control={
+  //         <Switch
+  //           checked={false}
+  //           onChange={() => console.log}
+  //           name='checkedB'
+  //           color='primary'
+  //         />
+  //       }
+  //       label='Primary'
+  //     />
+  //   </FormGroup>
+  // )
 
   return (
     <AppBar position='static'>
