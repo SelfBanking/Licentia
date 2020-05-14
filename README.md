@@ -1,6 +1,4 @@
-<img src="https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png" height="100px" />
-
-## Licentia Self Bank
+<img src="https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png" height="100" />
 
 ![Standard Js](https://cdn.rawgit.com/feross/standard/master/badge.svg)
 

@@ -62,7 +62,7 @@ export default {
         .toHexString()
     },
     text: {
-      primary: '#4A4A4A',
+      primary: '#ededed',
       secondary: '#6E6E6E',
       hint: '#B9B9B9'
     },
@@ -118,7 +118,9 @@ export default {
     },
     MuiTableRow: {
       root: {
-        height: 56
+        height: '100%',
+        backgroundColor:'black'
+
       }
     },
     MuiTableCell: {

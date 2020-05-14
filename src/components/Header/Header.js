@@ -17,6 +17,8 @@ import {
   useWalletState,
   connectMetamask
 } from '../../context/WalletContext'
+import SideMenu from '../SideMenu/SideMenu';
+import PortisBtn from '../Portis/PortisBtn';
 
 const Header = () => {
   const classes = useStyles()
@@ -38,6 +40,8 @@ const Header = () => {
             <Typography variant='h5'>{activeUser}</Typography>
           </Grid>
         )}
+
+        <PortisBtn/>
       </Grid>
     )
   }
@@ -67,9 +71,11 @@ const Header = () => {
           color='inherit'
           aria-label='menu'
         ></IconButton>
+         <SideMenu/>
         <Typography variant='h6' className={classes.title}>
           LICENTIA
         </Typography>
+        
         {connectStatus === 'GETTING' ? (
           <CircularProgress />
         ) : (
