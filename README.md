@@ -1,7 +1,5 @@
 <img src="https://res.cloudinary.com/dywsol9mg/image/upload/v1588780539/CMYK-VERTICAL-STANDARD-LOGO_qfskhb.png" height="100" />
 
-## Licentia Self Bank
-
 ![Standard Js](https://cdn.rawgit.com/feross/standard/master/badge.svg)
 
 This project uses StandardJS and VSCode. Install 'Prettier Standard' package for VSCode to ensure proper code syling.
