@@ -23,6 +23,14 @@
     "semantic-ui-react": "^0.88.2",
     "tinycolor2": "^1.4.1"
   },
+  "devDependencies": {
+    "aws-sdk": "^2.649.0",
+    "dotenv": "^8.2.0",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.1.1",
+    "gulp-rev-all": "^2.0.3",
+    "through2": "^3.0.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -33,11 +41,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
