@@ -9,9 +9,10 @@ export default makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    paddingLeft:'5px'
+    paddingLeft: '5px'
   },
   toolbar: {
-    backgroundColor: '#232323'
+    background: 'transparent',
+    boxShadow: 'none'
   }
 }))

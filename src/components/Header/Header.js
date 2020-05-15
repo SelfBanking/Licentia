@@ -14,8 +14,8 @@ import {
   useWalletState,
   connectMetamask
 } from '../../context/WalletContext'
-import SideMenu from '../SideMenu/SideMenu';
-import PortisBtn from '../Portis/PortisBtn';
+import SideMenu from '../SideMenu/SideMenu'
+import PortisBtn from '../Portis/PortisBtn'
 
 const Header = () => {
   const classes = useStyles()
@@ -38,7 +38,7 @@ const Header = () => {
           </Grid>
         )}
 
-        <PortisBtn/>
+        <PortisBtn />
       </Grid>
     )
   }
@@ -60,19 +60,19 @@ const Header = () => {
   // )
 
   return (
-    <AppBar position='static'>
-      <Toolbar className={classes.toolbar} elevation={0}>
+    <AppBar>
+      <Toolbar className={classes.toolBar} elevation={0}>
         <IconButton
           edge='start'
           className={classes.menuButton}
           color='inherit'
           aria-label='menu'
         ></IconButton>
-         <SideMenu/>
+        <SideMenu />
         <Typography variant='h6' className={classes.title}>
           LICENTIA
         </Typography>
-        
+
         {connectStatus === 'GETTING' ? (
           <CircularProgress />
         ) : (

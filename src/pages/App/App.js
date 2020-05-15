@@ -9,7 +9,7 @@ function App (props) {
     <HashRouter>
       <Header />
       <Switch>
-        <Route exact path='/' render={props => <Dashboard {...props} />} />
+        <Route exact path='/' component={Dashboard} />
       </Switch>
     </HashRouter>
   )
