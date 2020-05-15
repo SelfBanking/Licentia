@@ -42,6 +42,7 @@ async function updateCloudfrontRootObject (file) {
 }
 
 async function publish () {
+  console.log(credentials.bucket)
   const publisher = await awspublish.create(
     {
       region: credentials.region,
