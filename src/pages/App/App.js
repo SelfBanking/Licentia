@@ -1,36 +1,18 @@
 import React from 'react'
-import { createBrowserHistory } from 'history'
-import { Switch, Route, Router } from 'react-router-dom'
+import { Switch, Route, HashRouter } from 'react-router-dom'
 
-//import DashboardPage from '../Dashboard'
 import Header from '../../components/Header'
-import MainPage from '../MainPage/MainPage';
-
+import Dashboard from '../Dashboard'
 
 function App (props) {
-  const hist = createBrowserHistory()
-  
   return (
-    <Router history={hist}>
+    <HashRouter>
       <Header />
       <Switch>
-        {/* <Route
-          exact
-          path='/:crypto?'
-          render={props => <DashboardPage {...props} />}
-        /> */}
-        <Route
-          exact
-          path='/mainPage'
-          render={props => <MainPage {...props} />}
-        />
+        <Route exact path='/' component={Dashboard} />
       </Switch>
-    </Router>
+    </HashRouter>
   )
 }
-
-// function TopPadding () {
-//   return <div styles={{ height: 100 }}>.</div>
-// }
 
 export default App

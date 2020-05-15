@@ -1,20 +1,22 @@
 import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    border: '1px solid #e3e3e3',
-    padding: 10
-  },
+    mainGrid: {
+        marginTop:0,
+        paddingTop:'10px', 
+        height:'100%',
+        backgroundColor: '#000080ff',
+      },
+    paper:{
+      backgroundColor:'#113889ff',
+      padding:'50px'
+    },
+    flagDropdown:{
+      color:"black",
+      backgroundColor:"white"
+    },
+    accountGridStyle:{
+      paddingLeft:'20px'
+    }
 
-  container: {
-    width: '100%'
-  },
-  topMenu: {
-    backgroundColor: '#e3e3e3',
-    borderBottom: '1px solid gray',
-    height: 100
-  }
 }))
