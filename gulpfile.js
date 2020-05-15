@@ -13,26 +13,15 @@ const credentials = {
   distributionId: process.env.AWS_DISTRO_ID
 }
 
-const publisher = awspublish.create(
-  {
-    region: credentials.region,
-    params: {
-      Bucket: credentials.bucket
-    }
-  },
-  {
-    cacheFileName: 'cloudfront-cache'
-  }
-)
-
 const headers = { 'Cache-Control': 'max-age=315360000, no-transform, public' }
 
 // aws cloudfront update-distribution --id <id> --default-root-object <filename>
 const cloudfront = new Cloudfront()
 
 // need to update the index.html ( Default Root Object) include version tag
-function updateCloudfrontRootObject (file) {
+async function updateCloudfrontRootObject (file) {
   let params = { Id: process.env.AWS_DISTRO_ID }
+
   cloudfront.getDistributionConfig(params, (err, data) => {
     if (err) {
       console.log(err)
@@ -52,8 +41,18 @@ function updateCloudfrontRootObject (file) {
   })
 }
 
-function publish () {
-  console.log(credentials)
+async function publish () {
+  const publisher = await awspublish.create(
+    {
+      region: credentials.region,
+      params: {
+        Bucket: credentials.bucket
+      }
+    },
+    {
+      cacheFileName: 'cloudfront-cache'
+    }
+  )
 
   return (
     gulp
