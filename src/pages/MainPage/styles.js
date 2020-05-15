@@ -8,11 +8,15 @@ export default makeStyles(theme => ({
         backgroundColor: '#000080ff',
       },
     paper:{
-      backgroundColor:'#113889ff'
+      backgroundColor:'#113889ff',
+      padding:'50px'
     },
     flagDropdown:{
       color:"black",
       backgroundColor:"white"
+    },
+    accountGridStyle:{
+      paddingLeft:'20px'
     }
 
 }))
