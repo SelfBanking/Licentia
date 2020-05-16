@@ -6,14 +6,14 @@ import Mainchart from './components/Mainchart'
 import AccountDetails from './components/AccountDetails'
 import SideMenu from '../../components/SideMenu/SideMenu'
 //asset icons
-import ConnectIcon from '../../assets/asset-connect.png';
 import HelpIcon from '../../assets/asset-help.png';
 //currency selection
 import ReactFlagsSelect from 'react-flags-select'
 import 'react-flags-select/css/react-flags-select.css'
+import ConnectModal from '../../components/ConnectModal/ConnectModal';
 
 function Dashboard (props) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Grid container spacing={1} className={classes.mainGrid} align='center'>
@@ -31,16 +31,11 @@ function Dashboard (props) {
           </Typography>
         </Grid>
         <Grid item xs={8} container direction="row" justify="flex-end">
-          <GridListTile key="Connect">
-            <ListItem button key="Connect" className={classes.leftIconsBtns}>
-              <ListItemIcon>
-                <img src={ConnectIcon} alt="Connect" className={classes.imageIcon}/>;
-              </ListItemIcon>
-              <ListItemText primary="CONNECT" />
-            </ListItem>
+          <GridListTile>
+            <ConnectModal/>
           </GridListTile>
-          <GridListTile key="Connect">
-          <ListItem button key="Learn" className={classes.leftIconsBtns}>
+          <GridListTile key="Learn">
+            <ListItem button key="Learn" className={classes.leftIconsBtns}>
               <ListItemIcon>
                 <img src={HelpIcon} alt="Learn" className={classes.imageIcon}/>;
               </ListItemIcon>
