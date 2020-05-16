@@ -7,7 +7,7 @@ import Dashboard from '../Dashboard'
 function App (props) {
   return (
     <HashRouter>
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path='/' component={Dashboard} />
       </Switch>
