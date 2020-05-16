@@ -44,6 +44,8 @@ export function compoundReducer (state, action) {
           cToken: null
         }
       }
+    default:
+      break
   }
 }
 
