@@ -77,7 +77,7 @@ export function useCompoundDispatch () {
   return context
 }
 
-export async function getCtokens (dispatch, address) {
+export async function getCtokens (dispatch) {
   try {
     dispatch({ type: actions.GET_CTOKENS_REQUEST })
     const result = await getRequest(
