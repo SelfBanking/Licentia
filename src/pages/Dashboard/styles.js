@@ -5,10 +5,10 @@ export default makeStyles(theme => ({
         marginTop:0,
         paddingTop:'10px', 
         height:'100%',
-        backgroundColor: '#000080ff',
+        backgroundColor: '#044e65',
       },
     paper:{
-      backgroundColor:'#113889ff',
+      backgroundColor:'#185f7d',
       padding:'50px'
     },
     flagDropdown:{
