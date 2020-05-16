@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 export default makeStyles(theme => ({
     CardRoot: {
-        backgroundColor:'#e5e5e5',
+        backgroundColor:'#044e65',
         opacity:'80%',
         height: '140px',
         width: '400px'
@@ -17,19 +17,22 @@ export default makeStyles(theme => ({
       },
       title: {
         fontSize: 20,
-        fontStyle: 'bold'
+        fontStyle: 'bold',
+        color: '#ededed'
       },
       amount: {
         fontSize: 16,
-        fontStyle: 'bold'
+        fontStyle: 'bold',
+        color: '#ededed'
       },
       coinworth: {
         fontSize: 20,
-        fontStyle: 'bold'
+        fontStyle: 'bold',
+        color: '#ededed'
       },
       gain: {
-        fontSize: 16,
+        fontSize: 18,
         fontStyle: 'bold',
-        color: 'green'
+        color: '#71ff71'
       },
 }))
