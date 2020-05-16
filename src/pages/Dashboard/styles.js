@@ -17,6 +17,17 @@ export default makeStyles(theme => ({
     },
     accountGridStyle:{
       paddingLeft:'20px'
-    }
+    },
+    leftIconsBtns:{
+      backgroundColor:'#044e65',
+      color:'#ededed'
+    },
+    imageIcon:{
+      height:'28px',
+    },
+    topBtnContainer:{
+      flex:'10px',
+      maxHeight:'100px'
+    },
 
 }))
