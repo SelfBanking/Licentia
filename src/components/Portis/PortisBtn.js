@@ -38,7 +38,7 @@ const PortisBtn = React.memo(props => {
   }
 
   return (
-    <Button variant='contained' color='primary' onClick={openPortisClick}>
+    <Button variant='outlined' color='inherit' onClick={openPortisClick}>
       Portis Wallet
     </Button>
   )
