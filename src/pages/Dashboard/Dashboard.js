@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Grid, Paper, Typography, CircularProgress } from '@material-ui/core'
 import useStyles from './styles'
 import Mainchart from './components/Mainchart'
 import AccountDetails from './components/AccountDetails'
-import SideMenu from '../../components/SideMenu/SideMenu'
-//asset icons
-import HelpIcon from '../../assets/asset-help.png'
-//currency selection
-import ReactFlagsSelect from 'react-flags-select'
+// import SideMenu from '../../components/SideMenu/SideMenu'
+// //asset icons
+// import HelpIcon from '../../assets/asset-help.png'
+// //currency selection
+// import ReactFlagsSelect from 'react-flags-select'
 import 'react-flags-select/css/react-flags-select.css'
-import Header from '../../components/Header'
 
 // compound state
 import {
@@ -26,10 +25,6 @@ function Dashboard (props) {
 
   return (
     <Grid container spacing={1} className={classes.mainGrid} align='center'>
-      <Grid>
-        <Header />
-      </Grid>
-
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <Grid item xs={6}>

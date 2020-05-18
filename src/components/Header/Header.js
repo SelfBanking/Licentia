@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Toolbar,
-  AppBar,
   Typography,
   Button,
   IconButton,
@@ -38,32 +37,37 @@ const Header = () => {
           </Grid>
         )}
 
-        <PortisBtn />
+        {/* <PortisBtn /> */}
       </Grid>
     )
   }
 
   return (
-    <AppBar>
-      <Toolbar className={classes.toolBar} elevation={0}>
-        <IconButton
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-        ></IconButton>
-        <SideMenu />
-        <Typography variant='h6' className={classes.title}>
-          LICENTIA
-        </Typography>
-
-        {connectStatus === 'GETTING' ? (
-          <CircularProgress />
-        ) : (
-          <ButtonsOrAddress />
-        )}
-      </Toolbar>
-    </AppBar>
+    <Toolbar className={classes.toolbar} elevation={0}>
+      <Grid container direction='row'>
+        <Grid item md={1}>
+          {/* <IconButton
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='menu'
+          ></IconButton> */}
+          <SideMenu />
+        </Grid>
+        <Grid item md={5} lg={7}>
+          <Typography variant='h6' className={classes.title}>
+            LICENTIA
+          </Typography>
+        </Grid>
+        <Grid item md={2}>
+          {connectStatus === 'GETTING' ? (
+            <CircularProgress size={30} color='secondary' />
+          ) : (
+            <ButtonsOrAddress />
+          )}
+        </Grid>
+      </Grid>
+    </Toolbar>
   )
 }
 
@@ -77,31 +81,3 @@ const useHeaderLogic = () => {
 }
 
 export default Header
-
-{
-  /* <Grid item xs={4}>
-        <IconButton
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-        ></IconButton>
-        <SideMenu />
-        <Typography variant='h6' className={classes.title}>
-          LICENTIA
-        </Typography>
-      </Grid>
-      <Grid item xs={8} container direction='row' justify='flex-end'>
-        <GridListTile>
-          <ConnectModal />
-        </GridListTile>
-        <GridListTile key='Learn'>
-          <ListItem button key='Learn' className={classes.leftIconsBtns}>
-            <ListItemIcon>
-              <img src={HelpIcon} alt='Learn' className={classes.imageIcon} />;
-            </ListItemIcon>
-            <ListItemText primary='HELP' />
-          </ListItem>
-        </GridListTile>
-      </Grid> */
-}

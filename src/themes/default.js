@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2'
 
-const primary = '#343434'
+const primary = '#185f7d'
 const secondary = '#343434'
 const warning = '#343434'
 const success = '#343434'
@@ -67,7 +67,7 @@ export default {
       hint: '#B9B9B9'
     },
     background: {
-      default: '#F6F7FF',
+      default: '#185f7d',
       light: '#F3F5FF'
     }
   },
@@ -119,8 +119,7 @@ export default {
     MuiTableRow: {
       root: {
         height: '100%',
-        backgroundColor:'black'
-
+        backgroundColor: 'black'
       }
     },
     MuiTableCell: {

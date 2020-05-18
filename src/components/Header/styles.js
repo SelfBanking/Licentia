@@ -12,7 +12,8 @@ export default makeStyles(theme => ({
     paddingLeft: '5px'
   },
   toolbar: {
-    background: 'transparent',
-    boxShadow: 'none'
+    background: theme.palette.primary.main,
+    boxShadow: 'none',
+    padding: 10
   }
 }))

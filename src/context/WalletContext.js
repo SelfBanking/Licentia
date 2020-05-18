@@ -147,7 +147,7 @@ export async function connectMetamask (dispatch) {
             message: 'Succcessfully connected to wallet.'
           }
         })
-      }, 1000)
+      }, 300)
     }
 
     if (!web3Injected && !initMM) {
