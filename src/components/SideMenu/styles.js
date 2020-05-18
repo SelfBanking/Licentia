@@ -12,7 +12,7 @@ export default makeStyles(theme => ({
     backgroundColor:'#185f7d'
   },
   arrowIcon: {
-    backgroundColor:"#185f7d",
+    backgroundColor:"#2d3438",
     height: '25px',
     width: '25px',
     borderRadius: '50%',
@@ -30,7 +30,4 @@ export default makeStyles(theme => ({
   imageIcon:{
     height:'28px',
   },
-  test:{
-    backgroundColor:'black'
-  }
 }))

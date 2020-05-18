@@ -12,7 +12,7 @@ import ArrowForwardIosRounded from '@material-ui/icons/ArrowForwardIosRounded';
 
 //from assets folder
 import BorrowIcon from '../../assets/asset-borrow.png';
-import ConnectIcon from '../../assets/asset-connect.png';
+//import ConnectIcon from '../../assets/asset-connect.png';
 import DonateIcon from '../../assets/asset-donate.png';
 import ExchangeIcon from '../../assets/asset-exchange.png';
 import HelpIcon from '../../assets/asset-help.png';
@@ -25,6 +25,7 @@ import ShopIcon from '../../assets/asset-shop.png';
 import TradeIcon from '../../assets/asset-trade-invest.png';
 
 import useStyles from './styles'
+import ConnectModal from '../ConnectModal/ConnectModal';
 
 
 
@@ -53,12 +54,7 @@ const SideMenu = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button key="Connect" className={classes.leftIconsBtns}>
-          <ListItemIcon>
-            <img src={ConnectIcon} alt="Connect" className={classes.imageIcon}/>;
-          </ListItemIcon>
-          <ListItemText primary="CONNECT" />
-        </ListItem>
+        <ConnectModal/>
         <ListItem button key="Learn" className={classes.leftIconsBtns}>
           <ListItemIcon>
             <img src={HelpIcon} alt="Learn" className={classes.imageIcon}/>;
