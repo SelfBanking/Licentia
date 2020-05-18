@@ -43,22 +43,6 @@ const Header = () => {
     )
   }
 
-  // const SwitchComponent = () => (
-  //   <FormGroup>
-  //     <FormControlLabel
-  //       control={
-  //         <Switch
-  //           checked={false}
-  //           onChange={() => console.log}
-  //           name='checkedB'
-  //           color='primary'
-  //         />
-  //       }
-  //       label='Primary'
-  //     />
-  //   </FormGroup>
-  // )
-
   return (
     <AppBar>
       <Toolbar className={classes.toolBar} elevation={0}>
@@ -93,3 +77,31 @@ const useHeaderLogic = () => {
 }
 
 export default Header
+
+{
+  /* <Grid item xs={4}>
+        <IconButton
+          edge='start'
+          className={classes.menuButton}
+          color='inherit'
+          aria-label='menu'
+        ></IconButton>
+        <SideMenu />
+        <Typography variant='h6' className={classes.title}>
+          LICENTIA
+        </Typography>
+      </Grid>
+      <Grid item xs={8} container direction='row' justify='flex-end'>
+        <GridListTile>
+          <ConnectModal />
+        </GridListTile>
+        <GridListTile key='Learn'>
+          <ListItem button key='Learn' className={classes.leftIconsBtns}>
+            <ListItemIcon>
+              <img src={HelpIcon} alt='Learn' className={classes.imageIcon} />;
+            </ListItemIcon>
+            <ListItemText primary='HELP' />
+          </ListItem>
+        </GridListTile>
+      </Grid> */
+}

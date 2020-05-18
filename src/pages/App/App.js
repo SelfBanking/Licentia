@@ -3,13 +3,16 @@ import { Switch, Route, HashRouter } from 'react-router-dom'
 
 //import Header from '../../components/Header'
 import Dashboard from '../Dashboard'
+import { CompoundProvider } from '../../context/CompoundContext'
 
 function App (props) {
   return (
     <HashRouter>
       {/* <Header /> */}
       <Switch>
-        <Route exact path='/' component={Dashboard} />
+        <CompoundProvider>
+          <Route exact path='/' component={Dashboard} />
+        </CompoundProvider>
       </Switch>
     </HashRouter>
   )
