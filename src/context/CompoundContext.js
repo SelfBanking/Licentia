@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { getRequest } from '../services/HttpRequest'
 import logger from 'use-reducer-logger'
 
@@ -79,7 +79,7 @@ export function useCompoundReducer () {
       ? logger(compoundReducer)
       : compoundReducer
   const memoizedReducer = React.useCallback(thisReducer, [])
-  return useReducer(memoizedReducer, initialState)
+  return React.useReducer(memoizedReducer, initialState)
 }
 
 export function CompoundProvider ({ children }) {
