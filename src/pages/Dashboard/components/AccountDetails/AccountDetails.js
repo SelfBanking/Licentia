@@ -12,20 +12,8 @@ import ETHicon from 'cryptocurrency-icons/svg/color/eth.svg'
 
 const AccountDetails = () => {
   const classes = useStyles()
-  //const bull = <span className={classes.bullet}>•</span>;
 
-  //const myPortisWalletAccount = string;
-  //const stickyValue = window.localStorage.getItem(myPortisWalletAccount);
   const [account] = useState()
-
-  useEffect(() => window.localStorage.getItem('myPortisWalletAccount'), [
-    account
-  ])
-
-  // const functionOne = () => (
-  //  {
-
-  //  })
 
   return (
     <Grid container spacing={2} className={classes.accountGridStyle}>

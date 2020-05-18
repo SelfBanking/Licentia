@@ -1,5 +1,6 @@
 import React from 'react'
 import { getRequest } from '../services/HttpRequest'
+import logger from 'use-reducer-logger'
 
 const CompoundStateContext = React.createContext()
 const CompoundDispatchContext = React.createContext()
@@ -28,8 +29,6 @@ const actions = {
 }
 
 export function compoundReducer (state, action) {
-  console.log('STATE: ', state)
-  console.log('ACTION: ', action)
   switch (action.type) {
     case actions.GET_CTOKENS_REQUEST:
       return {
@@ -44,13 +43,44 @@ export function compoundReducer (state, action) {
           cToken: null
         }
       }
+
+    case actions.GET_CTOKENS_SUCCESS:
+      return {
+        ...state,
+        status: COMPOUND_STATUS.IDLE,
+        cTokens: action.payload,
+        message: {
+          cTokens: 'Success'
+        },
+        error: {
+          ...state.error,
+          cToken: null
+        }
+      }
+
+    case actions.GET_CTOKENS_FAILURE:
+      return {
+        ...state,
+        status: COMPOUND_STATUS.IDLE,
+        cTokens: [],
+        message: {
+          cTokens: null
+        },
+        error: {
+          ...state.error,
+          cTokens: 'Failed to get cTokens from Compound API'
+        }
+      }
     default:
       break
   }
 }
 
 export function CompoundProvider ({ children }) {
-  const [state, dispatch] = React.useReducer(compoundReducer, initialState)
+  const [state, dispatch] = React.useReducer(
+    logger(compoundReducer),
+    initialState
+  )
 
   return (
     <CompoundStateContext.Provider value={state}>
@@ -82,18 +112,14 @@ export function useCompoundDispatch () {
 export async function getCtokens (dispatch) {
   try {
     dispatch({ type: actions.GET_CTOKENS_REQUEST })
-    const result = await getRequest(
-      'https://api.compound.finance/api/v2/ctoken'
-    )
+    const url = 'https://api.compound.finance/api/v2/ctoken'
+    const result = await getRequest(url)
 
     if (result.status === 200) {
       const data = await result.json()
       dispatch({ type: actions.GET_CTOKENS_SUCCESS, payload: data.cToken })
     } else {
-      dispatch({
-        type: actions.GET_CTOKENS_FAILURE,
-        payload: 'Request failed.'
-      })
+      dispatch({ type: actions.GET_CTOKENS_FAILURE })
     }
   } catch (err) {
     dispatch({
