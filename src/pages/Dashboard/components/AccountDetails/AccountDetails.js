@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {  } from 'react'
 import { Typography, Card, CardContent, Grid } from '@material-ui/core'
 import {} from '@material-ui/icons'
 import {} from '@material-ui/styles'
@@ -13,7 +13,7 @@ import ETHicon from 'cryptocurrency-icons/svg/color/eth.svg'
 const AccountDetails = () => {
   const classes = useStyles()
 
-  const [account] = useState()
+  //const [account] = useState()
 
   return (
     <Grid container spacing={2} className={classes.accountGridStyle}>
