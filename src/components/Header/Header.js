@@ -73,7 +73,7 @@ const Header = () => {
     <AppBar elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar} elevation={0}>
         <Grid container direction='row' alignItems='center'>
-          <Grid item xs={2} sm={2} md={2} lg={1}>
+          <Grid item xs={3} sm={1} md={1} lg={1}>
             <IconButton
               color='inherit'
               onClick={() => toggleSidebar(layoutDispatch)}
@@ -103,14 +103,14 @@ const Header = () => {
               )}
             </IconButton>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
+          <Grid item xs={5} sm={4} md={4} lg={4}>
             <Typography variant='h6' className={classes.title}>
               SELF BANKING
             </Typography>
           </Grid>
-          <Grid item xs={4} sm={3} md={6} lg={5}>
+          <Grid item xs={6} sm={5} md={6} lg={5}>
             <Grid container alignItems='flex-start' justify='flex-end'>
-              <Grid item md={5} lg={5}>
+              <Grid item xs={12} sm={7} md={6} lg={4}>
                 {connectStatus === 'GETTING' ? (
                   <CircularProgress size={30} color='inherit' />
                 ) : (
