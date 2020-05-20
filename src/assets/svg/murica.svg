@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1235" height="650" viewBox="0 0 7410 3900">
+	<title>Flag of USA — gray &amp; white</title>
+	<defs>
+		<pattern patternUnits="userSpaceOnUse" width="494" height="420" id="s">
+			<path fill="#fff" d="m247 90 70.53 217.08-184.66-134.16h228.26L176.47 307.08z"/>
+		</pattern>
+	</defs>
+	<path fill="#fff" d="m0 0h7410v3900H0z"/>
+	<path stroke="#808080" stroke-width="7410" stroke-dasharray="300" d="m3705 0v3900"/>
+	<path fill="#404042" d="m0 0h2964v2100H0z"/>
+	<g fill="url(#s)">
+		<path d="m0 0h2964v2100H0z"/>
+		<path transform="translate(247,210)" d="m0 0h2470v1680H0z"/>
+	</g>
+</svg>
