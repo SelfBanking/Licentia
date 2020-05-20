@@ -2,12 +2,13 @@ import React, { } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import useStyles from './styles'
-import Mainchart from './components/Mainchart'
+//import Mainchart from './components/Mainchart'
 import AccountDetails from './components/AccountDetails'
 import 'react-flags-select/css/react-flags-select.css'
 import Header from '../../components/Header'
 
 import EthBalance from './components/EthBalance/EthBalance';
+import TokenGraph from '../../components/TokenGraph/TokenGraph';
 function Dashboard (props) {
 
   const classes = useStyles()
@@ -30,7 +31,8 @@ function Dashboard (props) {
       </Grid>
       <Grid item xs={12} sm={8}>
         <Paper className={classes.paper}>
-          <Mainchart />
+          {/* <Mainchart /> */}
+          <TokenGraph/>
         </Paper>
       </Grid>
       <Grid item xs={12} sm={4}>
