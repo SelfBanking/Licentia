@@ -12,7 +12,7 @@ import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone'
 import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone'
 import MonetizationOnTwoToneIcon from '@material-ui/icons/MonetizationOnTwoTone'
 
-import SettingsIcon from '@material-ui/icons/Settings'
+import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone'
 import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone'
 
 import { useTheme } from '@material-ui/styles'
@@ -97,7 +97,7 @@ const SpendItems = [
     id: 9,
     label: 'DONATE',
     link: '/donate',
-    icon: <SettingsIcon />
+    icon: <FavoriteTwoToneIcon />
   }
 ]
 
