@@ -15,6 +15,7 @@ import { EtherscanProvider } from '../../context/EtherscanContext'
 
 import useStyles from './styles'
 
+
 function App (props) {
   return (
     <HashRouter>
