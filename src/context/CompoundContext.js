@@ -2,8 +2,7 @@ import React from 'react'
 import { getRequest } from '../services/HttpRequest'
 import logger from 'use-reducer-logger'
 
-const CompoundStateContext = React.createContext()
-const CompoundDispatchContext = React.createContext()
+const CompoundContext = React.createContext()
 
 export const COMPOUND_STATUS = {
   INIT: 'INIT',
@@ -39,7 +38,6 @@ export function compoundReducer (state, action) {
           cTokens: 'Requesting cToken data from Compound API'
         },
         error: {
-          ...state.error,
           cToken: null
         }
       }
@@ -53,7 +51,6 @@ export function compoundReducer (state, action) {
           cTokens: 'Success'
         },
         error: {
-          ...state.error,
           cToken: null
         }
       }
@@ -67,46 +64,44 @@ export function compoundReducer (state, action) {
           cTokens: null
         },
         error: {
-          ...state.error,
           cTokens: 'Failed to get cTokens from Compound API'
         }
       }
+
     default:
       break
   }
 }
 
-export function CompoundProvider ({ children }) {
-  const [state, dispatch] = React.useReducer(
-    logger(compoundReducer),
-    initialState
-  )
+export function useCompoundReducer () {
+  const thisReducer =
+    process.env.NODE_ENV === 'development'
+      ? logger(compoundReducer)
+      : compoundReducer
+  const memoizedReducer = React.useCallback(thisReducer, [])
+  return React.useReducer(memoizedReducer, initialState)
+}
 
-  return (
-    <CompoundStateContext.Provider value={state}>
-      <CompoundDispatchContext.Provider value={dispatch}>
-        {children}
-      </CompoundDispatchContext.Provider>
-    </CompoundStateContext.Provider>
-  )
+export function CompoundProvider ({ children }) {
+  const { Provider } = CompoundContext
+  const [state, dispatch] = useCompoundReducer()
+  return <Provider value={{ state, dispatch }}>{children}</Provider>
 }
 
 export function useCompoundState () {
-  const context = React.useContext(CompoundStateContext)
-  if (context === undefined) {
-    throw new Error('useCompoundState must be used within a CompoundProvider')
+  const { state } = React.useContext(CompoundContext)
+  if (state === undefined) {
+    throw new Error('useCompoundState must be used in a CompoundProvider')
   }
-  return context
+  return state
 }
 
 export function useCompoundDispatch () {
-  const context = React.useContext(CompoundDispatchContext)
-  if (context === undefined) {
-    throw new Error(
-      'useCompoundDispatch must be used within a CompoundProvider'
-    )
+  const { dispatch } = React.useContext(CompoundContext)
+  if (dispatch === undefined) {
+    throw new Error('useCompoundState must be used in a CompoundProvider')
   }
-  return context
+  return dispatch
 }
 
 export async function getCtokens (dispatch) {

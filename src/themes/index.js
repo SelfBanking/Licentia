@@ -9,7 +9,7 @@ const overrides = {
       fontSize: '3rem'
     },
     h2: {
-      fontSize: '2rem'
+      fontSize: '1.7rem'
     },
     h3: {
       fontSize: '1.64rem'

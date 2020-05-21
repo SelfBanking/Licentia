@@ -1,14 +1,14 @@
 import tinycolor from 'tinycolor2'
 
-const primary = '#343434'
-const secondary = '#343434'
-const warning = '#343434'
-const success = '#343434'
-const info = '#343434'
-const error = '#343434'
+const primary = '#185f7d'
+const secondary = '#185f7d'
+const warning = '#185f7d'
+const success = '#185f7d'
+const info = '#185f7d'
+const error = '#185f7d'
 
-const lightenRate = 7.5
-const darkenRate = 15
+const lightenRate = 3.5
+const darkenRate = 8
 
 export default {
   palette: {
@@ -67,7 +67,7 @@ export default {
       hint: '#B9B9B9'
     },
     background: {
-      default: '#F6F7FF',
+      default: '#185f7d',
       light: '#F3F5FF'
     }
   },
@@ -85,6 +85,11 @@ export default {
         backgroundColor: '#4A4A4A1A'
       }
     },
+    MuiPaper: {
+      root: {
+        backgroundColor: primary
+      }
+    },
     MuiMenu: {
       paper: {
         boxShadow:
@@ -96,21 +101,6 @@ export default {
         color: '#B9B9B9'
       }
     },
-    MuiListItem: {
-      root: {
-        '&$selected': {
-          backgroundColor: '#F3F5FF !important',
-          '&:focus': {
-            backgroundColor: '#F3F5FF'
-          }
-        }
-      },
-      button: {
-        '&:hover, &:focus': {
-          backgroundColor: '#F3F5FF'
-        }
-      }
-    },
     MuiTouchRipple: {
       child: {
         backgroundColor: 'white'
@@ -119,8 +109,12 @@ export default {
     MuiTableRow: {
       root: {
         height: '100%',
-        backgroundColor:'black'
-
+        backgroundColor: 'black'
+      }
+    },
+    MuiDrawer: {
+      paperAnchorDockedLeft: {
+        borderRight: '0px'
       }
     },
     MuiTableCell: {

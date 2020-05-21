@@ -4,15 +4,9 @@ import {
   initalize,
   activeUser
 } from '../services/MetaMaskService'
+import logger from 'use-reducer-logger'
 
-const WalletStateContext = React.createContext()
-const WalletDispatchContext = React.createContext()
-
-// fetch status:
-// INIT is when the component first loads.
-// IDLE is after a failed or successful fetch, and
-// component is idle
-// GETTING is during a request
+const WalletContext = React.createContext()
 
 export const USER_STATUS = {
   INIT: 'INIT',
@@ -32,7 +26,7 @@ const initialState = {
 }
 
 const actions = {
-  DISCONNECT_WALLET_SUCCESS: 'SIGN_OUT_SUCCESS',
+  DISCONNECT_WALLET_SUCCESS: 'DISCONNECT_WALLET_SUCCESS',
 
   CONNECT_METAMASK_REQUEST: 'CONNECT_METAMASK_REQUEST',
   CONNECT_METAMASK_SUCCESS: 'CONNECT_METAMASK_SUCCESS',
@@ -40,8 +34,6 @@ const actions = {
 }
 
 export function walletReducer (state, action) {
-  console.log('prevState: ', state)
-  console.log('action: ', action)
   switch (action.type) {
     case actions.CONNECT_METAMASK_REQUEST:
       return {
@@ -94,32 +86,35 @@ export function walletReducer (state, action) {
   }
 }
 
-export function WalletProvider ({ children }) {
-  const [state, dispatch] = React.useReducer(walletReducer, initialState)
+export function useWalletReducer () {
+  const thisReducer =
+    process.env.NODE_ENV === 'development'
+      ? logger(walletReducer)
+      : walletReducer
+  const memoizedReducer = React.useCallback(thisReducer, [])
+  return React.useReducer(memoizedReducer, initialState)
+}
 
-  return (
-    <WalletStateContext.Provider value={state}>
-      <WalletDispatchContext.Provider value={dispatch}>
-        {children}
-      </WalletDispatchContext.Provider>
-    </WalletStateContext.Provider>
-  )
+export function WalletProvider ({ children }) {
+  const { Provider } = WalletContext
+  const [state, dispatch] = useWalletReducer()
+  return <Provider value={{ state, dispatch }}>{children}</Provider>
 }
 
 export function useWalletState () {
-  const context = React.useContext(WalletStateContext)
-  if (context === undefined) {
+  const { state } = React.useContext(WalletContext)
+  if (state === undefined) {
     throw new Error('useWalletState must be used within a WalletProvider')
   }
-  return context
+  return state
 }
 
 export function useWalletDispatch () {
-  const context = React.useContext(WalletDispatchContext)
-  if (context === undefined) {
+  const { dispatch } = React.useContext(WalletContext)
+  if (dispatch === undefined) {
     throw new Error('useWalletDispatch must be used within a WalletProvider')
   }
-  return context
+  return dispatch
 }
 
 export async function connectMetamask (dispatch) {
@@ -147,7 +142,7 @@ export async function connectMetamask (dispatch) {
             message: 'Succcessfully connected to wallet.'
           }
         })
-      }, 1000)
+      }, 300)
     }
 
     if (!web3Injected && !initMM) {

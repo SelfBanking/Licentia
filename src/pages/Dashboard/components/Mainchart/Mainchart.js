@@ -1,18 +1,9 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
-import {} from '@material-ui/icons'
+import { Grid } from '@material-ui/core'
 
 import useStyles from './styles'
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts'
 import {} from '@material-ui/styles'
 
 const Mainchart = () => {
@@ -67,26 +58,29 @@ const Mainchart = () => {
   //  })
 
   return (
-    <div className={classes.chartStyle}>
-      <Typography variant='h3' gutterBottom>
-        My Crypto Graph
-      </Typography>
+    <Grid item xs={12} className={classes.chartStyle}>
       <LineChart
-        width={800}
-        height={500}
+        width={600}
+        height={400}
         data={data}
         margin={{
           top: 10,
           right: 30,
-          left: 0,
+          left: 20,
           bottom: 0
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
+        <CartesianGrid
+          strokeDasharray='3 3'
+          vertical={false}
+          horizontal={false}
+          stroke='#aab8c2'
+        />
         <XAxis dataKey='name' stroke='#ccc' />
         <YAxis stroke='#ccc' />
-        <Tooltip />
-        <Legend />
+
+        {/* <Tooltip /> */}
+        {/* <Legend /> */}
         <Line
           type='monotone'
           dataKey='pv'
@@ -95,7 +89,7 @@ const Mainchart = () => {
         />
         <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
       </LineChart>
-    </div>
+    </Grid>
   )
 }
 

@@ -1,27 +1,47 @@
 import React from 'react'
 import {
-  Toolbar,
   AppBar,
+  Toolbar,
   Typography,
   Button,
-  IconButton,
   CircularProgress,
-  Grid
+  Grid,
+  IconButton
 } from '@material-ui/core'
+
+import { Menu as MenuIcon } from '@material-ui/icons'
+import MenuOpenTwoToneIcon from '@material-ui/icons/MenuOpenTwoTone'
+
+import classNames from 'classnames'
+import ShortPublicKey from '../ShortPublicKey'
+
 import useStyles from './styles'
+
 import {
   useWalletDispatch,
   useWalletState,
-  connectMetamask
+  connectMetamask,
+  disconnectWallet
 } from '../../context/WalletContext'
-import SideMenu from '../SideMenu/SideMenu'
-import PortisBtn from '../Portis/PortisBtn'
+
+import {
+  useLayoutState,
+  useLayoutDispatch,
+  toggleSidebar
+} from '../../context/LayoutContext'
 
 const Header = () => {
-  const classes = useStyles()
-  const { handleWalletConnect, activeUser, connectStatus } = useHeaderLogic()
+  const {
+    handleWalletConnect,
+    activeUser,
+    connectStatus,
+    layoutState,
+    layoutDispatch,
+    handleDisconnectWallet,
+    classes
+  } = useHeaderLogic()
 
-  const ButtonsOrAddress = () => {
+  const ConnectOrAddress = () => {
     return (
       <Grid>
         {!activeUser ? (
@@ -34,74 +54,99 @@ const Header = () => {
           </Button>
         ) : (
           <Grid>
-            <Typography variant='h5'>{activeUser}</Typography>
+            <Typography variant='h5'>
+              <Button
+                variant='outlined'
+                color='inherit'
+                onClick={handleDisconnectWallet}
+              >
+                <ShortPublicKey address={activeUser} />
+              </Button>
+            </Typography>
           </Grid>
         )}
-
-        <PortisBtn />
       </Grid>
     )
   }
 
   return (
-    <AppBar>
-      <Toolbar className={classes.toolBar} elevation={0}>
-        <IconButton
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-        ></IconButton>
-        <SideMenu />
-        <Typography variant='h6' className={classes.title}>
-          LICENTIA
-        </Typography>
-
-        {connectStatus === 'GETTING' ? (
-          <CircularProgress />
-        ) : (
-          <ButtonsOrAddress />
-        )}
+    <AppBar elevation={0} className={classes.appBar}>
+      <Toolbar className={classes.toolbar} elevation={0}>
+        <Grid container direction='row' alignItems='center'>
+          <Grid item xs={3} sm={1} md={1} lg={1}>
+            <IconButton
+              color='inherit'
+              onClick={() => toggleSidebar(layoutDispatch)}
+              className={classNames(
+                classes.headerMenuButton,
+                classes.headerMenuButtonCollapse
+              )}
+            >
+              {layoutState.isSidebarOpened ? (
+                <MenuOpenTwoToneIcon
+                  classes={{
+                    root: classNames(
+                      classes.headerIcon,
+                      classes.headerIconCollapse
+                    )
+                  }}
+                />
+              ) : (
+                <MenuIcon
+                  classes={{
+                    root: classNames(
+                      classes.headerIcon,
+                      classes.headerIconCollapse
+                    )
+                  }}
+                />
+              )}
+            </IconButton>
+          </Grid>
+          <Grid item xs={5} sm={4} md={4} lg={4}>
+            <Typography variant='h6' className={classes.title}>
+              SELF BANKING
+            </Typography>
+          </Grid>
+          <Grid item xs={6} sm={5} md={6} lg={5}>
+            <Grid container alignItems='flex-start' justify='flex-end'>
+              <Grid item xs={12} sm={7} md={6} lg={4}>
+                {connectStatus === 'GETTING' ? (
+                  <CircularProgress size={30} color='inherit' />
+                ) : (
+                  <ConnectOrAddress />
+                )}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   )
 }
 
 const useHeaderLogic = () => {
+  const classes = useStyles()
+  const layoutState = useLayoutState()
+  const layoutDispatch = useLayoutDispatch()
   const walletDispatch = useWalletDispatch()
+
   const { status: connectStatus, activeUser, Web3Injected } = useWalletState()
 
   const handleWalletConnect = () => connectMetamask(walletDispatch)
+  const handleDisconnectWallet = () => disconnectWallet(walletDispatch)
 
-  return { handleWalletConnect, activeUser, Web3Injected, connectStatus }
+  return {
+    handleWalletConnect,
+    handleDisconnectWallet,
+    activeUser,
+    Web3Injected,
+    connectStatus,
+    layoutState,
+    layoutDispatch,
+    classes
+  }
 }
 
 export default Header
 
-//{
-  /* <Grid item xs={4}>
-        <IconButton
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-        ></IconButton>
-        <SideMenu />
-        <Typography variant='h6' className={classes.title}>
-          LICENTIA
-        </Typography>
-      </Grid>
-      <Grid item xs={8} container direction='row' justify='flex-end'>
-        <GridListTile>
-          <ConnectModal />
-        </GridListTile>
-        <GridListTile key='Learn'>
-          <ListItem button key='Learn' className={classes.leftIconsBtns}>
-            <ListItemIcon>
-              <img src={HelpIcon} alt='Learn' className={classes.imageIcon} />;
-            </ListItemIcon>
-            <ListItemText primary='HELP' />
-          </ListItem>
-        </GridListTile>
-      </Grid> */
-//}

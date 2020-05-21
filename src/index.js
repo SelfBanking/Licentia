@@ -10,14 +10,12 @@ import * as serviceWorker from './serviceWorker'
 import { WalletProvider } from './context/WalletContext'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={Themes.default}>
-      <CssBaseline />
-      <WalletProvider>
-        <App />
-      </WalletProvider>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={Themes.default}>
+    <CssBaseline />
+    <WalletProvider>
+      <App />
+    </WalletProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 )
 
