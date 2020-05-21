@@ -3,15 +3,7 @@ import { Grid } from '@material-ui/core'
 
 import useStyles from './styles'
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts'
 import {} from '@material-ui/styles'
 
 const Mainchart = () => {
@@ -82,7 +74,6 @@ const Mainchart = () => {
           strokeDasharray='3 3'
           vertical={false}
           horizontal={false}
-          strokeDasharray='4 4'
           stroke='#aab8c2'
         />
         <XAxis dataKey='name' stroke='#ccc' />

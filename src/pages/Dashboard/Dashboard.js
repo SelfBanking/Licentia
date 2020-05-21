@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Grid, Paper, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import useStyles from './styles'
 import Mainchart from './components/Mainchart'
 import AccountDetails from './components/AccountDetails'
