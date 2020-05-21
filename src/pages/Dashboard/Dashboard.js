@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
-import { Grid, Typography, CircularProgress } from '@material-ui/core'
+import React, {useEffect} from 'react'
+import {withRouter} from 'react-router-dom'
+import {Grid, Typography, CircularProgress} from '@material-ui/core'
+import EthBalance from '../../components/EthBalance/EthBalance'
 import Mainchart from './components/Mainchart'
 import AccountDetails from './components/AccountDetails'
 import 'react-flags-select/css/react-flags-select.css'
@@ -9,14 +10,14 @@ import 'react-flags-select/css/react-flags-select.css'
 import {
   useCompoundState,
   useCompoundDispatch,
-  getCtokens
+  getCtokens,
 } from '../../context/CompoundContext'
 
-function Dashboard (props) {
-  const { cTokens, status } = useDashboardLogic()
+function Dashboard(props) {
+  const {cTokens, status} = useDashboardLogic()
 
   return (
-    <Grid container spacing={1} align='center'>
+    <Grid container spacing={1} align="center">
       <Grid item xs={12}>
         <Grid item xs={6}>
           <h2>Total Balance</h2>
@@ -27,8 +28,8 @@ function Dashboard (props) {
               defaultCountry='US'
               countries={['US', 'GB', 'FR', 'DE', 'IT', 'NG']}
             /> */}
-          <Typography variant='h1' component='h2'>
-            $ 125,00
+          <Typography variant="h1" component="h2">
+            <EthBalance />
           </Typography>
         </Grid>
         <Grid>
@@ -43,7 +44,7 @@ function Dashboard (props) {
         <Mainchart />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <Typography variant='h3' gutterBottom>
+        <Typography variant="h3" gutterBottom>
           ALL ASSETS
         </Typography>
         <AccountDetails />
@@ -52,14 +53,14 @@ function Dashboard (props) {
   )
 }
 
-function CTokenPriceComponent ({ cTokens }) {
+function CTokenPriceComponent({cTokens}) {
   const template = []
   cTokens.map((token, i) => template.push(<p key={i}>{token.name}</p>))
   return template
 }
 
-export function useDashboardLogic () {
-  const { status, cTokens, message, error } = useCompoundState()
+export function useDashboardLogic() {
+  const {status, cTokens, message, error} = useCompoundState()
   const compoundDispatch = useCompoundDispatch()
 
   useEffect(() => {
@@ -68,7 +69,7 @@ export function useDashboardLogic () {
     }
   })
 
-  return { status, cTokens, message, error }
+  return {status, cTokens, message, error}
 }
 
 export default withRouter(Dashboard)

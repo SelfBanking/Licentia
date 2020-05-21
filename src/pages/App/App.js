@@ -1,6 +1,6 @@
 import React from 'react'
-import { Switch, Route, HashRouter } from 'react-router-dom'
-import { Grid } from '@material-ui/core'
+import {Switch, Route, HashRouter} from 'react-router-dom'
+import {Grid} from '@material-ui/core'
 
 import Header from '../../components/Header'
 import Dashboard from '../Dashboard'
@@ -8,26 +8,29 @@ import Sidebar from '../../components/Sidebar'
 
 import classnames from 'classnames'
 
-import { CompoundProvider } from '../../context/CompoundContext'
-import { LayoutProvider, useLayoutState } from '../../context/LayoutContext'
-import { WalletProvider } from '../../context/WalletContext'
+import {CompoundProvider} from '../../context/CompoundContext'
+import {EtherscanProvider} from '../../context/EtherScanContext'
+import {LayoutProvider, useLayoutState} from '../../context/LayoutContext'
+import {WalletProvider} from '../../context/WalletContext'
 import useStyles from './styles'
 
-function App (props) {
+function App(props) {
   return (
     <HashRouter>
       <LayoutProvider>
         <WalletProvider>
-          <AppContent />
+          <EtherscanProvider>
+            <AppContent />
+          </EtherscanProvider>
         </WalletProvider>
       </LayoutProvider>
     </HashRouter>
   )
 }
 
-function AppContent () {
+function AppContent() {
   const classes = useStyles()
-  const { isSidebarOpened } = useLayoutState()
+  const {isSidebarOpened} = useLayoutState()
 
   return (
     <Grid className={classes.root}>
@@ -35,12 +38,12 @@ function AppContent () {
       <Sidebar />
       <Grid
         className={classnames(classes.content, {
-          [classes.contentShift]: isSidebarOpened
+          [classes.contentShift]: isSidebarOpened,
         })}
       >
         <CompoundProvider>
           <Switch>
-            <Route exact path='/' component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
           </Switch>
         </CompoundProvider>
       </Grid>
