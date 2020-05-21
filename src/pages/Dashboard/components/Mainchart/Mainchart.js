@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
 
 import useStyles from './styles'
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { LineChart, Line } from 'recharts'
 import {} from '@material-ui/styles'
 
 const Mainchart = () => {
+  const { classes, innerWidth, data } = useMainChartLogic()
+
+  // console.log(window.innerWidth)
+  return (
+    <Grid item xs={12} className={classes.chartStyle}>
+      <LineChart width={innerWidth} height={300} data={data}>
+        <Line type='monotone' dataKey='pv' stroke='#8884d8' strokeWidth={2} />
+        <Line type='monotone' dataKey='uv' stroke='#3335a8' strokeWidth={2} />
+      </LineChart>
+    </Grid>
+  )
+}
+
+function useMainChartLogic () {
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth * 0.7)
   const classes = useStyles()
+
+  window.addEventListener('resize', event =>
+    setInnerWidth(event.target.innerWidth * 0.7)
+  )
+
   const data = [
     {
       name: 'Page A',
@@ -52,45 +72,8 @@ const Mainchart = () => {
       amt: 2100
     }
   ]
-  // const functionOne = () => (
-  //  {
 
-  //  })
-
-  return (
-    <Grid item xs={12} className={classes.chartStyle}>
-      <LineChart
-        width={600}
-        height={400}
-        data={data}
-        margin={{
-          top: 10,
-          right: 30,
-          left: 20,
-          bottom: 0
-        }}
-      >
-        <CartesianGrid
-          strokeDasharray='3 3'
-          vertical={false}
-          horizontal={false}
-          stroke='#aab8c2'
-        />
-        <XAxis dataKey='name' stroke='#ccc' />
-        <YAxis stroke='#ccc' />
-
-        {/* <Tooltip /> */}
-        {/* <Legend /> */}
-        <Line
-          type='monotone'
-          dataKey='pv'
-          stroke='#8884d8'
-          activeDot={{ r: 8 }}
-        />
-        <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-      </LineChart>
-    </Grid>
-  )
+  return { classes, data, innerWidth }
 }
 
 export default Mainchart
