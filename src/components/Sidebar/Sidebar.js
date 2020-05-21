@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Drawer, IconButton, List, Box, Typography } from '@material-ui/core'
+import { Drawer, IconButton, List } from '@material-ui/core'
 
 // connect
-import LinkTwoToneIcon from '@material-ui/icons/LinkTwoTone'
+// import LinkTwoToneIcon from '@material-ui/icons/LinkTwoTone'
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone'
 import SwapHorizontalCircleTwoToneIcon from '@material-ui/icons/SwapHorizontalCircleTwoTone'
 import PanToolTwoToneIcon from '@material-ui/icons/PanToolTwoTone'
@@ -34,20 +34,11 @@ import {
 
 const GettingStartedItems = [
   {
-    id: 0,
-    label: 'CONNECT',
-    link: '/connect',
-    icon: <LinkTwoToneIcon />
-  },
-  {
     id: 1,
     label: 'LEARN',
     link: '/learn',
     icon: <HelpTwoToneIcon />
-  }
-]
-
-const EarnItems = [
+  },
   {
     id: 2,
     label: 'EXCHANGE',
@@ -65,10 +56,7 @@ const EarnItems = [
     label: 'LEND',
     link: '/lend',
     icon: <PanToolTwoToneIcon />
-  }
-]
-
-const SpendItems = [
+  },
   {
     id: 5,
     label: 'PAY',
@@ -146,42 +134,7 @@ function Sidebar ({ location }) {
         </IconButton>
       </div>
       <List className={classes.sidebarList}>
-        {isSidebarOpened ? (
-          <Box m={3}>
-            <Typography variant='h2'>Get Started</Typography>
-          </Box>
-        ) : null}
         {GettingStartedItems.map(link => (
-          <SidebarLink
-            key={link.id}
-            location={location}
-            isSidebarOpened={isSidebarOpened}
-            {...link}
-          />
-        ))}
-      </List>
-      <List className={classes.sidebarList}>
-        {isSidebarOpened ? (
-          <Box m={3}>
-            <Typography variant='h2'>Earn</Typography>
-          </Box>
-        ) : null}
-        {EarnItems.map(link => (
-          <SidebarLink
-            key={link.id}
-            location={location}
-            isSidebarOpened={isSidebarOpened}
-            {...link}
-          />
-        ))}
-      </List>
-      <List className={classes.sidebarList}>
-        {isSidebarOpened ? (
-          <Box m={3}>
-            <Typography variant='h2'>Spend</Typography>
-          </Box>
-        ) : null}
-        {SpendItems.map(link => (
           <SidebarLink
             key={link.id}
             location={location}
