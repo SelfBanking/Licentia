@@ -105,9 +105,7 @@ const Header = props => {
             </IconButton>
           </Grid>
           <Grid item xs={5} sm={5} md={5} lg={8}>
-            <Button onClick={() => props.history.push('/')}>
-              LICENTIA SELF BANKING
-            </Button>
+            <Button onClick={() => props.history.push('/')}>LICENTIA</Button>
           </Grid>
           <Grid item xs={6} sm={5} md={6} lg={3}>
             <Grid container alignItems='flex-start' justify='flex-end'>
