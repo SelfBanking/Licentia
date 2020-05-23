@@ -2,7 +2,8 @@ import React from 'react'
 import {
   web3Injected,
   initalize,
-  activeUser
+  activeUser,
+  balanceUser,
 } from '../services/MetaMaskService'
 import logger from 'use-reducer-logger'
 
@@ -11,18 +12,18 @@ const WalletContext = React.createContext()
 export const USER_STATUS = {
   INIT: 'INIT',
   IDLE: 'IDLE',
-  GETTING: 'GETTING'
+  GETTING: 'GETTING',
 }
 
 const initialState = {
   status: USER_STATUS.INIT,
   web3Injected,
   message: {
-    metamask: null
+    metamask: null,
   },
   error: {
-    metamask: false
-  }
+    metamask: false,
+  },
 }
 
 const actions = {
@@ -30,34 +31,36 @@ const actions = {
 
   CONNECT_METAMASK_REQUEST: 'CONNECT_METAMASK_REQUEST',
   CONNECT_METAMASK_SUCCESS: 'CONNECT_METAMASK_SUCCESS',
-  CONNECT_METAMASK_FAILURE: 'CONNECT_METAMASK_FAILURE'
+  CONNECT_METAMASK_FAILURE: 'CONNECT_METAMASK_FAILURE',
 }
 
-export function walletReducer (state, action) {
+export function walletReducer(state, action) {
   switch (action.type) {
     case actions.CONNECT_METAMASK_REQUEST:
       return {
         ...state,
         status: USER_STATUS.GETTING,
         activeUser: null,
+        balanceUser: null,
         error: {
           ...state.error,
-          metamask: null
-        }
+          metamask: null,
+        },
       }
     case actions.CONNECT_METAMASK_SUCCESS:
       return {
         ...state,
         status: USER_STATUS.IDLE,
         activeUser: action.payload.account,
+        balanceUser: action.payload.balance,
         message: {
           ...state.message,
-          metamask: action.payload.message
+          metamask: action.payload.message,
         },
         error: {
           ...state.error,
-          metamask: null
-        }
+          metamask: null,
+        },
       }
 
     case actions.CONNECT_METAMASK_FAILURE:
@@ -65,20 +68,21 @@ export function walletReducer (state, action) {
         ...state,
         status: USER_STATUS.IDLE,
         activeUser: null,
+        balanceUser: null,
         error: {
           ...state.error,
-          metamask: action.payload
-        }
+          metamask: action.payload,
+        },
       }
     case actions.DISCONNECT_WALLET_SUCCESS:
       return {
         ...state,
         status: USER_STATUS.IDLE,
-        activeUser: null,
+        balanceUser: null,
         message: {
           ...state.message,
-          metamask: 'Successfully disconnected wallet.'
-        }
+          metamask: 'Successfully disconnected wallet.',
+        },
       }
 
     default:
@@ -86,7 +90,7 @@ export function walletReducer (state, action) {
   }
 }
 
-export function useWalletReducer () {
+export function useWalletReducer() {
   const thisReducer =
     process.env.NODE_ENV === 'development'
       ? logger(walletReducer)
@@ -95,30 +99,30 @@ export function useWalletReducer () {
   return React.useReducer(memoizedReducer, initialState)
 }
 
-export function WalletProvider ({ children }) {
-  const { Provider } = WalletContext
+export function WalletProvider({children}) {
+  const {Provider} = WalletContext
   const [state, dispatch] = useWalletReducer()
-  return <Provider value={{ state, dispatch }}>{children}</Provider>
+  return <Provider value={{state, dispatch}}>{children}</Provider>
 }
 
-export function useWalletState () {
-  const { state } = React.useContext(WalletContext)
+export function useWalletState() {
+  const {state} = React.useContext(WalletContext)
   if (state === undefined) {
     throw new Error('useWalletState must be used within a WalletProvider')
   }
   return state
 }
 
-export function useWalletDispatch () {
-  const { dispatch } = React.useContext(WalletContext)
+export function useWalletDispatch() {
+  const {dispatch} = React.useContext(WalletContext)
   if (dispatch === undefined) {
     throw new Error('useWalletDispatch must be used within a WalletProvider')
   }
   return dispatch
 }
 
-export async function connectMetamask (dispatch) {
-  dispatch({ type: actions.CONNECT_METAMASK_REQUEST })
+export async function connectMetamask(dispatch) {
+  dispatch({type: actions.CONNECT_METAMASK_REQUEST})
   try {
     const initMM = await initalize()
 
@@ -127,20 +131,22 @@ export async function connectMetamask (dispatch) {
 
       return dispatch({
         type: actions.CONNECT_METAMASK_FAILURE,
-        payload: 'Mestamask is required.'
+        payload: 'Mestamask is required.',
       })
     }
 
     if (initMM) {
       setTimeout(async () => {
         const user = await activeUser()
-
+        const balance = await balanceUser(user)
+        console.log('my account balance is: ' + balance)
         dispatch({
           type: actions.CONNECT_METAMASK_SUCCESS,
           payload: {
             account: user,
-            message: 'Succcessfully connected to wallet.'
-          }
+            balance: balance,
+            message: 'Succcessfully connected to wallet.',
+          },
         })
       }, 300)
     }
@@ -148,20 +154,20 @@ export async function connectMetamask (dispatch) {
     if (!web3Injected && !initMM) {
       dispatch({
         type: actions.CONNECT_METAMASK_FAILURE,
-        payload: 'Failed to connect Metamask.'
+        payload: 'Failed to connect Metamask.',
       })
     }
   } catch (err) {
     dispatch({
       type: actions.CONNECT_METAMASK_FAILURE,
-      payload: 'Failed to connect Metamask'
+      payload: 'Failed to connect Metamask',
     })
   }
 }
 
-export function disconnectWallet (dispatch) {
+export function disconnectWallet(dispatch) {
   dispatch({
     type: actions.DISCONNECT_WALLET_SUCCESS,
-    payload: { message: 'Successfully disconnected wallet.' }
+    payload: {message: 'Successfully disconnected wallet.'},
   })
 }

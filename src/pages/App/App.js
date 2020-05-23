@@ -1,6 +1,6 @@
 import React from 'react'
-import { Switch, Route, HashRouter } from 'react-router-dom'
-import { Grid, Box } from '@material-ui/core'
+import {Switch, Route, HashRouter} from 'react-router-dom'
+import {Grid, Box} from '@material-ui/core'
 
 import Header from '../../components/Header'
 import Dashboard from '../Dashboard'
@@ -11,14 +11,13 @@ import Pay from '../Pay'
 
 import classnames from 'classnames'
 
-import { CompoundProvider } from '../../context/CompoundContext'
-import { LayoutProvider, useLayoutState } from '../../context/LayoutContext'
-import { WalletProvider } from '../../context/WalletContext'
-import { EtherscanProvider } from '../../context/EtherscanContext'
+import {CompoundProvider} from '../../context/CompoundContext'
+import {LayoutProvider, useLayoutState} from '../../context/LayoutContext'
+import {WalletProvider} from '../../context/WalletContext'
 
 import useStyles from './styles'
 
-function App (props) {
+function App(props) {
   return (
     <HashRouter>
       <LayoutProvider>
@@ -30,9 +29,9 @@ function App (props) {
   )
 }
 
-function AppContent () {
+function AppContent() {
   const classes = useStyles()
-  const { isSidebarOpened } = useLayoutState()
+  const {isSidebarOpened} = useLayoutState()
 
   return (
     <Grid className={classes.root}>
@@ -40,16 +39,16 @@ function AppContent () {
       <Sidebar />
       <Grid
         className={classnames(classes.content, {
-          [classes.contentShift]: isSidebarOpened
+          [classes.contentShift]: isSidebarOpened,
         })}
       >
         <WithContext>
           <AddSpaceBelowHeader />
           <Switch>
-            <Route exact path='/' component={Dashboard} />
-            <Route exact path='/learn' component={Learn} />
-            <Route exact path='/exchange' component={Exchange} />
-            <Route exact path='/pay' component={Pay} />
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/learn" component={Learn} />
+            <Route exact path="/exchange" component={Exchange} />
+            <Route exact path="/pay" component={Pay} />
           </Switch>
         </WithContext>
       </Grid>
@@ -57,15 +56,11 @@ function AppContent () {
   )
 }
 
-function WithContext ({ children }) {
-  return (
-    <CompoundProvider>
-      <EtherscanProvider>{children}</EtherscanProvider>
-    </CompoundProvider>
-  )
+function WithContext({children}) {
+  return <CompoundProvider>{children}</CompoundProvider>
 }
 
-function AddSpaceBelowHeader () {
+function AddSpaceBelowHeader() {
   return <Box mt={10}></Box>
 }
 
