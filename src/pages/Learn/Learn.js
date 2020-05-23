@@ -2,12 +2,12 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Grid } from '@material-ui/core'
 
-function Exchange () {
+function Learn () {
   return (
     <Grid container justify='center'>
-      <Grid item>This is the Exchange page.</Grid>
+      <Grid item>This is the Learn page.</Grid>
     </Grid>
   )
 }
 
-export default withRouter(Exchange)
+export default withRouter(Learn)

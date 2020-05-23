@@ -5,6 +5,9 @@ import { Grid, Box } from '@material-ui/core'
 import Header from '../../components/Header'
 import Dashboard from '../Dashboard'
 import Sidebar from '../../components/Sidebar'
+import Learn from '../Learn'
+import Exchange from '../Exchange'
+import Pay from '../Pay'
 
 import classnames from 'classnames'
 
@@ -14,7 +17,6 @@ import { WalletProvider } from '../../context/WalletContext'
 import { EtherscanProvider } from '../../context/EtherscanContext'
 
 import useStyles from './styles'
-
 
 function App (props) {
   return (
@@ -43,9 +45,11 @@ function AppContent () {
       >
         <WithContext>
           <AddSpaceBelowHeader />
-
           <Switch>
             <Route exact path='/' component={Dashboard} />
+            <Route exact path='/learn' component={Learn} />
+            <Route exact path='/exchange' component={Exchange} />
+            <Route exact path='/pay' component={Pay} />
           </Switch>
         </WithContext>
       </Grid>
