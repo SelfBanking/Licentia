@@ -11,7 +11,6 @@ import classnames from 'classnames'
 import {CompoundProvider} from '../../context/CompoundContext'
 import {LayoutProvider, useLayoutState} from '../../context/LayoutContext'
 import {WalletProvider} from '../../context/WalletContext'
-import {EtherscanProvider} from '../../context/EtherscanContext'
 
 import useStyles from './styles'
 
@@ -20,9 +19,7 @@ function App(props) {
     <HashRouter>
       <LayoutProvider>
         <WalletProvider>
-          <EtherscanProvider>
-            <AppContent />
-          </EtherscanProvider>
+          <AppContent />
         </WalletProvider>
       </LayoutProvider>
     </HashRouter>
@@ -55,11 +52,7 @@ function AppContent() {
 }
 
 function WithContext({children}) {
-  return (
-    <CompoundProvider>
-      <EtherscanProvider>{children}</EtherscanProvider>
-    </CompoundProvider>
-  )
+  return <CompoundProvider></CompoundProvider>
 }
 
 function AddSpaceBelowHeader() {

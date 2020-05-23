@@ -4,10 +4,10 @@ import {Grid, Typography} from '@material-ui/core'
 
 import useStyles from './styles'
 import Mainchart from './components/Mainchart'
-import AccountDetails from './components/AccountDetails'
+// import AccountDetails from './components/AccountDetails'
 import 'react-flags-select/css/react-flags-select.css'
 import Header from '../../components/Header'
-import EthBalance from './components/EthBalance/EthBalance'
+
 function Dashboard(props) {
   const classes = useStyles()
 
@@ -16,29 +16,25 @@ function Dashboard(props) {
       <Grid>
         <Header />
       </Grid>
-
-      <Grid item xs={8}>
+      <Grid item xs={10}>
         <Grid container justify="center" align="center">
           <Grid item xs={12}>
             <Typography variant="h2">WALLET BALANCE</Typography>
           </Grid>
-
-          <Grid item xs={12}>
-            <EthBalance></EthBalance>
-          </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={8}>
+      <Grid item xs={12}>
         <Grid container jusity="center" align="center">
           <Mainchart />
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <Typography variant="h3" gutterBottom>
+      {/* <Grid item xs={12} sm={4}>
+        <Typography variant='h3' gutterBottom>
           ALL ASSETS
         </Typography>
         <AccountDetails />
-      </Grid>
+      </Grid> */}
     </Grid>
   )
 }

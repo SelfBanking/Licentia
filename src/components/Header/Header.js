@@ -6,11 +6,12 @@ import {
   Button,
   CircularProgress,
   Grid,
-  IconButton
+  IconButton,
 } from '@material-ui/core'
 
-import { Menu as MenuIcon } from '@material-ui/icons'
+import {Menu as MenuIcon} from '@material-ui/icons'
 import MenuOpenTwoToneIcon from '@material-ui/icons/MenuOpenTwoTone'
+import {withRouter} from 'react-router-dom'
 
 import classNames from 'classnames'
 import ShortPublicKey from '../ShortPublicKey'
@@ -21,16 +22,16 @@ import {
   useWalletDispatch,
   useWalletState,
   connectMetamask,
-  disconnectWallet
+  disconnectWallet,
 } from '../../context/WalletContext'
 
 import {
   useLayoutState,
   useLayoutDispatch,
-  toggleSidebar
+  toggleSidebar,
 } from '../../context/LayoutContext'
 
-const Header = () => {
+const Header = props => {
   const {
     handleWalletConnect,
     activeUser,
@@ -38,7 +39,7 @@ const Header = () => {
     layoutState,
     layoutDispatch,
     handleDisconnectWallet,
-    classes
+    classes,
   } = useHeaderLogic()
 
   const ConnectOrAddress = () => {
@@ -46,18 +47,18 @@ const Header = () => {
       <Grid>
         {!activeUser ? (
           <Button
-            variant='outlined'
-            color='inherit'
+            variant="outlined"
+            color="inherit"
             onClick={handleWalletConnect}
           >
             CONNECT WALLET
           </Button>
         ) : (
           <Grid>
-            <Typography variant='h5'>
+            <Typography variant="h5">
               <Button
-                variant='outlined'
-                color='inherit'
+                variant="outlined"
+                color="inherit"
                 onClick={handleDisconnectWallet}
               >
                 <ShortPublicKey address={activeUser} />
@@ -72,10 +73,10 @@ const Header = () => {
   return (
     <AppBar elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar} elevation={0}>
-        <Grid container direction='row' alignItems='center'>
-          <Grid item xs={3} sm={1} md={1} lg={1}>
+        <Grid container direction="row" alignItems="center">
+          <Grid item xs={1} sm={1} md={1} lg={1}>
             <IconButton
-              color='inherit'
+              color="inherit"
               onClick={() => toggleSidebar(layoutDispatch)}
               className={classNames(
                 classes.headerMenuButton,
@@ -88,7 +89,7 @@ const Header = () => {
                     root: classNames(
                       classes.headerIcon,
                       classes.headerIconCollapse
-                    )
+                    ),
                   }}
                 />
               ) : (
@@ -97,22 +98,22 @@ const Header = () => {
                     root: classNames(
                       classes.headerIcon,
                       classes.headerIconCollapse
-                    )
+                    ),
                   }}
                 />
               )}
             </IconButton>
           </Grid>
-          <Grid item xs={5} sm={4} md={4} lg={4}>
-            <Typography variant='h6' className={classes.title}>
-              SELF BANKING
-            </Typography>
+          <Grid item xs={5} sm={5} md={5} lg={8}>
+            <Button onClick={() => props.history.push('/')}>
+              LICENTIA SELF BANKING
+            </Button>
           </Grid>
-          <Grid item xs={6} sm={5} md={6} lg={5}>
-            <Grid container alignItems='flex-start' justify='flex-end'>
-              <Grid item xs={12} sm={7} md={6} lg={4}>
+          <Grid item xs={6} sm={5} md={6} lg={3}>
+            <Grid container alignItems="flex-start" justify="flex-end">
+              <Grid item xs={12} sm={7} md={6} lg={12}>
                 {connectStatus === 'GETTING' ? (
-                  <CircularProgress size={30} color='inherit' />
+                  <CircularProgress size={30} color="inherit" />
                 ) : (
                   <ConnectOrAddress />
                 )}
@@ -131,7 +132,7 @@ const useHeaderLogic = () => {
   const layoutDispatch = useLayoutDispatch()
   const walletDispatch = useWalletDispatch()
 
-  const { status: connectStatus, activeUser, Web3Injected } = useWalletState()
+  const {status: connectStatus, activeUser, Web3Injected} = useWalletState()
 
   const handleWalletConnect = () => connectMetamask(walletDispatch)
   const handleDisconnectWallet = () => disconnectWallet(walletDispatch)
@@ -144,9 +145,8 @@ const useHeaderLogic = () => {
     connectStatus,
     layoutState,
     layoutDispatch,
-    classes
+    classes,
   }
 }
 
-export default Header
-
+export default withRouter(Header)
