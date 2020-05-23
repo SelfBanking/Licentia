@@ -1,15 +1,15 @@
 import React from 'react'
-import {withRouter} from 'react-router-dom'
-import {Grid, Typography} from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
+import { Grid, Typography } from '@material-ui/core'
 
 import useStyles from './styles'
 import Mainchart from './components/Mainchart'
 import 'react-flags-select/css/react-flags-select.css'
 import Header from '../../components/Header'
-import {useWalletState} from '../../context/WalletContext'
+import { useWalletState } from '../../context/WalletContext'
 
-function Dashboard(props) {
-  const {activeUser, balanceUser, classes} = useDashboardLogic()
+function Dashboard (props) {
+  const { activeUser, balanceUser, classes } = useDashboardLogic()
 
   return (
     <Grid container spacing={1} className={classes.root}>
@@ -17,22 +17,22 @@ function Dashboard(props) {
         <Header />
       </Grid>
       <Grid item xs={10}>
-        <Grid container justify="center" align="center">
+        <Grid container justify='center' align='center'>
           <Grid item xs={12}>
-            <Typography variant="h2">WALLET BALANCE</Typography>
+            <Typography variant='h2'>WALLET BALANCE</Typography>
             {!activeUser ? (
-              <Typography variant="h3">0.00000</Typography>
+              <Typography variant='h3'>0.00000</Typography>
             ) : (
               <Grid>
-                <Typography variant="h3">{balanceUser}</Typography>
+                <Typography variant='h3'>{balanceUser}</Typography>
               </Grid>
             )}
           </Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12} />
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Grid container jusity="center" align="center">
+        <Grid container jusity='center' align='center'>
           <Mainchart />
         </Grid>
       </Grid>
@@ -52,7 +52,7 @@ const useDashboardLogic = () => {
     status: connectStatus,
     activeUser,
     balanceUser,
-    Web3Injected,
+    Web3Injected
   } = useWalletState()
 
   return {
@@ -60,7 +60,7 @@ const useDashboardLogic = () => {
     balanceUser,
     Web3Injected,
     connectStatus,
-    classes,
+    classes
   }
 }
 
