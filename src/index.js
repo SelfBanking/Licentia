@@ -12,9 +12,7 @@ import { WalletProvider } from './context/WalletContext'
 ReactDOM.render(
   <ThemeProvider theme={Themes.default}>
     <CssBaseline />
-    <WalletProvider>
-      <App />
-    </WalletProvider>
+    <App />
   </ThemeProvider>,
   document.getElementById('root')
 )
