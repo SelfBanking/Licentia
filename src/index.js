@@ -7,8 +7,6 @@ import { CssBaseline } from '@material-ui/core'
 import Themes from './themes'
 import * as serviceWorker from './serviceWorker'
 
-import { WalletProvider } from './context/WalletContext'
-
 ReactDOM.render(
   <ThemeProvider theme={Themes.default}>
     <CssBaseline />

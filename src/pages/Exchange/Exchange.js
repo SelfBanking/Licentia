@@ -22,14 +22,14 @@ function Exchange () {
         </Grid>
       </Grid>
       <Grid className={classes.divider} container justify='center'>
-        <Grid container xs={8} spacing={2}>
+        <Grid container spacing={2}>
           <Typography className={classes.titleBalance} align='center' variant='h2'>My Balance:</Typography>
           <Typography align='center' variant='h4'>
                 0.2341232
             <p> $ 125.00 </p>
           </Typography>
         </Grid>
-        <Grid container xs={8} spacing={2}>
+        <Grid container spacing={2}>
           <Grid item xs={4}>
             <FormControl required className={classes.formControl}>
               <InputLabel className={classes.labelForm}>I want to exchange</InputLabel>

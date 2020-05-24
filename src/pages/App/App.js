@@ -8,13 +8,13 @@ import Sidebar from '../../components/Sidebar'
 import Learn from '../Learn'
 import Exchange from '../Exchange'
 import Pay from '../Pay'
+import Trade from '../Trade'
 
 import classnames from 'classnames'
 
 import { CompoundProvider } from '../../context/CompoundContext'
 import { LayoutProvider, useLayoutState } from '../../context/LayoutContext'
 import { WalletProvider } from '../../context/WalletContext'
-import { EtherscanProvider } from '../../context/EtherscanContext'
 
 import useStyles from './styles'
 
@@ -50,6 +50,7 @@ function AppContent () {
             <Route exact path='/learn' component={Learn} />
             <Route exact path='/exchange' component={Exchange} />
             <Route exact path='/pay' component={Pay} />
+            <Route exact path='/trade' component={Trade} />
           </Switch>
         </WithContext>
       </Grid>
@@ -58,11 +59,7 @@ function AppContent () {
 }
 
 function WithContext ({ children }) {
-  return (
-    <CompoundProvider>
-      <EtherscanProvider>{children}</EtherscanProvider>
-    </CompoundProvider>
-  )
+  return <CompoundProvider>{children}</CompoundProvider>
 }
 
 function AddSpaceBelowHeader () {
