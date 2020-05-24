@@ -37,7 +37,7 @@ export function etherscanReducer (state, action) {
         status: ETHSCAN_STATUS.GETTING,
         balance: 0,
         message: {
-            balance: 'Requesting balance information data from Etherscan API'
+          balance: 'Requesting balance information data from Etherscan API'
         },
         error: {
           ...state.error,
@@ -51,7 +51,7 @@ export function etherscanReducer (state, action) {
         status: ETHSCAN_STATUS.IDLE,
         balance: action.payload,
         message: {
-            balance: 'Success'
+          balance: 'Success'
         },
         error: {
           ...state.error,
@@ -65,7 +65,7 @@ export function etherscanReducer (state, action) {
         status: ETHSCAN_STATUS.IDLE,
         balance: 0,
         message: {
-            balance: null
+          balance: null
         },
         error: {
           ...state.error,
@@ -113,15 +113,14 @@ export function useEtherscanDispatch () {
 export async function getAccountInfo (dispatch, address) {
   try {
     dispatch({ type: actions.GET_ETHSCAN_REQUEST })
-    const newAddress = address ? address : '0xdf97e5F3446C5DE45D216e7D202F84d44b59703e'
+    const newAddress = address || '0xdf97e5F3446C5DE45D216e7D202F84d44b59703e'
     const url = new URL('https://api.etherscan.io/api')
-    url.searchParams.append('module','account')
-    url.searchParams.append('action','balance')
-    url.searchParams.append('address',newAddress)
-    url.searchParams.append('tag','latest')
-    url.searchParams.append('apikey','BVFQGV541P13XRSMMBH2WP8CM3P3PDZG1U')
+    url.searchParams.append('module', 'account')
+    url.searchParams.append('action', 'balance')
+    url.searchParams.append('address', newAddress)
+    url.searchParams.append('tag', 'latest')
+    url.searchParams.append('apikey', 'BVFQGV541P13XRSMMBH2WP8CM3P3PDZG1U')
     console.log(url.href)
-    
 
     const result = await getRequest(url)
 

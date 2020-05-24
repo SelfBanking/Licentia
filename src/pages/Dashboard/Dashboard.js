@@ -4,13 +4,12 @@ import { Grid, Typography } from '@material-ui/core'
 
 import useStyles from './styles'
 import Mainchart from './components/Mainchart'
-// import AccountDetails from './components/AccountDetails'
 import 'react-flags-select/css/react-flags-select.css'
 import Header from '../../components/Header'
-import EthBalance from './components/EthBalance/EthBalance'
+import { useWalletState } from '../../context/WalletContext'
 
 function Dashboard (props) {
-  const classes = useStyles()
+  const { activeUser, balanceUser, classes } = useDashboardLogic()
 
   return (
     <Grid container spacing={1} className={classes.root}>
@@ -21,10 +20,15 @@ function Dashboard (props) {
         <Grid container justify='center' align='center'>
           <Grid item xs={12}>
             <Typography variant='h2'>WALLET BALANCE</Typography>
+            {!activeUser ? (
+              <Typography variant='h3'>0.00000</Typography>
+            ) : (
+              <Grid>
+                <Typography variant='h3'>{balanceUser}</Typography>
+              </Grid>
+            )}
           </Grid>
-          <Grid item xs={12}>
-            <EthBalance></EthBalance>
-          </Grid>
+          <Grid item xs={12} />
         </Grid>
       </Grid>
       <Grid item xs={12}>
@@ -40,6 +44,24 @@ function Dashboard (props) {
       </Grid> */}
     </Grid>
   )
+}
+const useDashboardLogic = () => {
+  const classes = useStyles()
+
+  const {
+    status: connectStatus,
+    activeUser,
+    balanceUser,
+    Web3Injected
+  } = useWalletState()
+
+  return {
+    activeUser,
+    balanceUser,
+    Web3Injected,
+    connectStatus,
+    classes
+  }
 }
 
 export default withRouter(Dashboard)

@@ -2,7 +2,8 @@ import React from 'react'
 import {
   web3Injected,
   initalize,
-  activeUser
+  activeUser,
+  balanceUser
 } from '../services/MetaMaskService'
 import logger from 'use-reducer-logger'
 
@@ -40,6 +41,7 @@ export function walletReducer (state, action) {
         ...state,
         status: USER_STATUS.GETTING,
         activeUser: null,
+        balanceUser: null,
         error: {
           ...state.error,
           metamask: null
@@ -50,6 +52,7 @@ export function walletReducer (state, action) {
         ...state,
         status: USER_STATUS.IDLE,
         activeUser: action.payload.account,
+        balanceUser: action.payload.balance,
         message: {
           ...state.message,
           metamask: action.payload.message
@@ -65,6 +68,7 @@ export function walletReducer (state, action) {
         ...state,
         status: USER_STATUS.IDLE,
         activeUser: null,
+        balanceUser: null,
         error: {
           ...state.error,
           metamask: action.payload
@@ -74,7 +78,7 @@ export function walletReducer (state, action) {
       return {
         ...state,
         status: USER_STATUS.IDLE,
-        activeUser: null,
+        balanceUser: null,
         message: {
           ...state.message,
           metamask: 'Successfully disconnected wallet.'
@@ -134,11 +138,13 @@ export async function connectMetamask (dispatch) {
     if (initMM) {
       setTimeout(async () => {
         const user = await activeUser()
-
+        const balance = await balanceUser(user)
+        console.log('my account balance is: ' + balance)
         dispatch({
           type: actions.CONNECT_METAMASK_SUCCESS,
           payload: {
             account: user,
+            balance: balance,
             message: 'Succcessfully connected to wallet.'
           }
         })
