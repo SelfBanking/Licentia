@@ -23,7 +23,7 @@ function Dashboard (props) {
             <Typography variant='h2'>WALLET BALANCE</Typography>
           </Grid>
           <Grid item xs={12}>
-            <EthBalance></EthBalance>
+            <EthBalance />
           </Grid>
         </Grid>
       </Grid>

@@ -66,7 +66,7 @@ function WithContext ({ children }) {
 }
 
 function AddSpaceBelowHeader () {
-  return <Box mt={10}></Box>
+  return <Box mt={10} />
 }
 
 export default App

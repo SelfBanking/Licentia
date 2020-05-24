@@ -9,7 +9,7 @@ import {
 
 const EthBalance = () => {
   const { balance, status } = useEthBalanceLogic()
-  //const classes = useStyles()
+  // const classes = useStyles()
 
   return (
     <Grid item xs={12}>
