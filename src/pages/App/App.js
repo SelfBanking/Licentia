@@ -8,6 +8,7 @@ import Sidebar from '../../components/Sidebar'
 import Learn from '../Learn'
 import Exchange from '../Exchange'
 import Pay from '../Pay'
+import Trade from '../Trade'
 
 import classnames from 'classnames'
 
@@ -49,6 +50,7 @@ function AppContent () {
             <Route exact path='/learn' component={Learn} />
             <Route exact path='/exchange' component={Exchange} />
             <Route exact path='/pay' component={Pay} />
+            <Route exact path='/trade' component={Trade} />
           </Switch>
         </WithContext>
       </Grid>

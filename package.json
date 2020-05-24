@@ -1,6 +1,6 @@
 {
   "name": "Selfbanking.io",
-  "version": "0.1.0",
+  "version": "latest",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.12",
@@ -50,5 +50,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "standard": {
+    "ignore": [
+      "gulpfile.js",
+      "setupTests.js",
+      "package.json"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
   }
 }
